@@ -5,7 +5,12 @@ public class Slayer extends Personagem {
         super(name, "Humano", "Guerreiro", 45, 16, 30,
                 new String[]{"Ataque Poderoso", "Defesa Sólida", "Intimidação"}, "Leal Neutro");
     }
-
+    @Override
+    public void iniciarNarrativa() {
+        super.iniciarNarrativa();
+        System.out.println("Com sua espada afiada em mãos, você sente a determinação em sua alma.");
+        System.out.println("Os ventos da batalha estão perto, e você sabe que nada o deterá.");
+    }
     public void ataquePoderoso(Inimigo inimigo) {
         Random rand = new Random();
         int dano = rand.nextInt(12) + 8;
