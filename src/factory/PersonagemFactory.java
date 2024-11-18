@@ -6,16 +6,14 @@ import personagens.Slayer;
 import personagens.Vampiro;
 
 public class PersonagemFactory {
-    public static Personagem criarPersonagem(int escolha, String nome) {
-        switch (escolha) {
-            case 1:
-                return new Bruxa(nome);
-            case 2:
-                return new Slayer(nome);
-            case 3:
-                return new Vampiro(nome);
-            default:
-                throw new IllegalArgumentException("Escolha inválida para personagem.");
+    public static Personagem criarPersonagem(String tipo, String nome) {
+        if (tipo.equals("Bruxa Poderosa")) {
+            return new Bruxa(nome);
+        } else if (tipo.equals("Slayer")) {
+            return new Slayer(nome);
+        } else if (tipo.equals("Vampiro")) {
+            return new Vampiro(nome);
         }
+        return null;
     }
 }

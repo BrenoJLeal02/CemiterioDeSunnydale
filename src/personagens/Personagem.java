@@ -1,7 +1,7 @@
 package personagens;
 
 import inimigos.Inimigo;
-import main.Combate;
+//import main.Combate;
 
 import java.util.Scanner;
 
@@ -41,18 +41,18 @@ public class Personagem {
         this.alignment = alignment;
     }
 
-    public void displayStats() {
-        System.out.println("Nome: " + nome);
-        System.out.println("Raça: " + race);
-        System.out.println("Classe: " + classType);
-        System.out.println("Pontos de Vida (HP): " + hp);
-        System.out.println("Classe de Armadura (CA): " + ac);
+    public void displayStats(Personagem personagem) {
+        System.out.println("Nome: " + personagem.nome);
+        System.out.println("Raça: " + personagem.race);
+        System.out.println("Classe: " + personagem.classType);
+        System.out.println("Pontos de Vida (HP): " + personagem.hp);
+        System.out.println("Classe de Armadura (CA): " + personagem.ac);
         System.out.print("Habilidades: ");
-        for (String skill : skills) {
+        for (String skill : personagem.skills) {
             System.out.print(skill + " ");
         }
         System.out.println();
-        System.out.println("Tendência: " + alignment);
+        System.out.println("Tendência: " + personagem.alignment);
     }
 
     public void iniciarNarrativa() {
@@ -83,13 +83,13 @@ public class Personagem {
             case 3:
                 procurarItens();
                 break;
-            case 4:
-                seguirEmFrente();
-                break;
-            default:
-                System.out.println("Opção inválida, tente novamente.");
-                escolhaDeAcao();
-                break;
+//            case 4:
+//                seguirEmFrente();
+//                break;
+//            default:
+//                System.out.println("Opção inválida, tente novamente.");
+//                escolhaDeAcao();
+//                break;
         }
     }
 
@@ -112,13 +112,13 @@ public class Personagem {
         temItem = true;
     }
 
-    public void seguirEmFrente() {
-        System.out.println("\nVocê decide seguir em frente, sem hesitar. O caminho à frente é sombrio e denso, mas você sente uma estranha energia no ar.");
-        System.out.println("À medida que avança, você ouve sons que parecem vir de um ser desconhecido...");
-        System.out.println("De repente, um inimigo surge de entre as árvores! Um combate está prestes a começar!");
-
-        Inimigo inimigo = new Inimigo("Goblin", 30, 12, 15);
-        Combate combate = new Combate(this, inimigo);
-        combate.iniciarCombate();
-    }
+//    public void seguirEmFrente() {
+//        System.out.println("\nVocê decide seguir em frente, sem hesitar. O caminho à frente é sombrio e denso, mas você sente uma estranha energia no ar.");
+//        System.out.println("À medida que avança, você ouve sons que parecem vir de um ser desconhecido...");
+//        System.out.println("De repente, um inimigo surge de entre as árvores! Um combate está prestes a começar!");
+//
+//        Inimigo inimigo = new Inimigo("Goblin", 30, 12, 15);
+//        Combate combate = new Combate(this, inimigo);
+//        combate.iniciarCombate();
+//    }
 }
