@@ -9,7 +9,6 @@ import utils.GameUtils;
 
 import java.util.Scanner;
 
-import static factory.PersonagemFactory.criarPersonagem;
 import static utils.GameUtils.*;
 
 public class GameLogic {
@@ -46,43 +45,22 @@ public class GameLogic {
                 nameSet = true;
         } while (!nameSet);
 
-        // Escolha do personagem
-        while (personagem == null) { // Usando a variável global
-            limparConsole();
-            printTitulo("Escolha um personagem para iniciar o jogo:");
-            System.out.println("(1) Bruxa Poderosa");
-            System.out.println("(2) Slayer");
-            System.out.println("(3) Vampiro");
-            System.out.println("(4) Sair");
-            int choice = readInt("-> ", 4);
+        // Escolher o personagem usando a fábrica
+        personagem = PersonagemFactory.escolherEInstanciarPersonagem(nome);
 
-            switch (choice) {
-                case 1:
-                    personagem = criarPersonagem("Bruxa Poderosa", nome); // Atribui à variável global
-                    break;
-                case 2:
-                    personagem = criarPersonagem("Slayer", nome);
-                    break;
-                case 3:
-                    personagem = criarPersonagem("Vampiro", nome);
-                    break;
-                case 4:
-                    System.out.println("Saindo do jogo...");
-                    isRunning = false;
-                    return;
-                default:
-                    System.out.println("Opção inválida! Tente novamente.");
-            }
+        if (personagem == null) {
+            System.out.println("Jogo encerrado.");
+            isRunning = false;
+            return;
         }
 
-        // Jogo inicializado com o personagem selecionado
+        // Exibir mensagem de boas-vindas
         limparConsole();
         printTitulo("Bem-vindo ao jogo, " + personagem.getNome() + "!");
         personagem.displayStats(personagem);
 
-        // Continuação do loop principal do jogo
+        // Loop principal do jogo
         while (isRunning) {
-
             printTitulo("O que você gostaria de fazer?");
             System.out.println("(1) Ver status do personagem");
             System.out.println("(2) Continuar a aventura");
@@ -104,6 +82,7 @@ public class GameLogic {
             }
         }
     }
+
 
 
     private static void setAtoAtual(GameState newAct) {
