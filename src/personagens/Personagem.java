@@ -1,34 +1,52 @@
+package personagens;
+
+import inimigos.Inimigo;
+import main.Combate;
+
 import java.util.Scanner;
 
 public class Personagem {
-    String name;
+    String nome;
     String race;
     String classType;
     int hp;
     int ac;
-    int speed;
     String[] skills;
     String alignment;
     boolean temItem = false;
 
-    public Personagem(String name, String race, String classType, int hp, int ac, int speed, String[] skills, String alignment) {
-        this.name = name;
+    public String getNome() {
+        return nome;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getAc() {
+        return ac;
+    }
+
+    public void setAc(int ac) {
+        this.ac = ac;
+    }
+
+    public Personagem(String nome, String race, String classType, int hp, int ac, String[] skills, String alignment) {
+        this.nome = nome;
         this.race = race;
         this.classType = classType;
         this.hp = hp;
         this.ac = ac;
-        this.speed = speed;
         this.skills = skills;
         this.alignment = alignment;
     }
 
     public void displayStats() {
-        System.out.println("Nome: " + name);
+        System.out.println("Nome: " + nome);
         System.out.println("Raça: " + race);
         System.out.println("Classe: " + classType);
         System.out.println("Pontos de Vida (HP): " + hp);
         System.out.println("Classe de Armadura (CA): " + ac);
-        System.out.println("Deslocamento: " + speed + " pés");
         System.out.print("Habilidades: ");
         for (String skill : skills) {
             System.out.print(skill + " ");
@@ -39,7 +57,7 @@ public class Personagem {
 
     public void iniciarNarrativa() {
         System.out.println("Você se encontra em uma terra desconhecida, com seu destino incerto...");
-        System.out.println("Agora, com seu nome " + name + ", você está pronto para começar sua jornada!");
+        System.out.println("Agora, com seu nome " + nome + ", você está pronto para começar sua jornada!");
         System.out.println("Prepare-se, aventureiro...");
         escolhaDeAcao();
     }

@@ -1,9 +1,12 @@
+package personagens;
+
+import inimigos.Inimigo;
+
 import java.util.Random;
 
 public class Vampiro extends Personagem {
-    public Vampiro(String name) {
-        super(name, "Vampiro", "Caçador Sanguíneo", 50, 14, 35,
-                new String[]{"Golpe Vampírico", "Regeneração", "Hipnose"}, "Neutro Maligno");
+    public Vampiro(String nome) {
+        super(nome, "FactoryPersonagem.Vampiro", "Caçador Sanguíneo", 50, 14, new String[]{"Golpe Vampírico", "Regeneração", "Hipnose"}, "Neutro Maligno");
     }
 
     public void golpeVampirico(Inimigo inimigo) {
@@ -11,7 +14,7 @@ public class Vampiro extends Personagem {
         int dano = rand.nextInt(10) + 6;
         System.out.println("\nVocê usa seu Golpe Vampírico, causando " + dano + " de dano e recuperando 5 HP!");
         this.hp += 5;
-        inimigo.hp -= dano;
+        inimigo.setHp(inimigo.getHp() - dano);
     }
 
     public void regeneracao() {

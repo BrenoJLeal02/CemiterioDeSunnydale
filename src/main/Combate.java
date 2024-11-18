@@ -1,3 +1,8 @@
+package main;
+
+import inimigos.Inimigo;
+import personagens.*;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,7 +17,7 @@ public class Combate {
 
     public void iniciarCombate() {
         Scanner scanner = new Scanner(System.in);
-        while (jogador.hp > 0 && inimigo.hp > 0) {
+        while (jogador.getHp() > 0 && inimigo.getHp() > 0) {
             System.out.println("\nSua vez de agir!");
             System.out.println("1. Atacar");
             System.out.println("2. Defender");
@@ -48,12 +53,13 @@ public class Combate {
                         break;
                     case 2:
                         System.out.println("\nVocê se prepara para a defesa, aumentando sua chance de evitar o ataque.");
-                        jogador.ac += 2;
+                        jogador.setAc(jogador.getAc() + 2);
                         break;
                     case 3:
                         if (jogador.temItem) {
                             System.out.println("\nVocê usa um item (Poção de Cura) e recupera 10 HP.");
-                            jogador.hp += 10;
+                            int hp = inimigo.getHp() + 10;
+                            inimigo.setHp(hp);
                             jogador.temItem = false;
                         } else {
                             System.out.println("\nVocê não tem itens para usar.");
@@ -66,8 +72,8 @@ public class Combate {
                         System.out.println("Opção inválida.");
                         break;
                 }
-            } else if (jogador instanceof BruxaPoderosa) {
-                BruxaPoderosa bruxa = (BruxaPoderosa) jogador;
+            } else if (jogador instanceof Bruxa) {
+                Bruxa bruxa = (Bruxa) jogador;
                 switch (escolha) {
                     case 1:
                         System.out.println("Escolha um tipo de ataque:");
@@ -93,12 +99,12 @@ public class Combate {
                         break;
                     case 2:
                         System.out.println("\nVocê se prepara para a defesa, aumentando sua chance de evitar o ataque.");
-                        jogador.ac += 2;
+                        jogador.setAc(jogador.getAc() + 2);
                         break;
                     case 3:
                         if (jogador.temItem) {
                             System.out.println("\nVocê usa um item (Poção de Cura) e recupera 10 HP.");
-                            jogador.hp += 10;
+                            inimigo.setHp(inimigo.getHp() + 10);
                             jogador.temItem = false;
                         } else {
                             System.out.println("\nVocê não tem itens para usar.");
@@ -138,12 +144,12 @@ public class Combate {
                         break;
                     case 2:
                         System.out.println("\nVocê se prepara para a defesa, aumentando sua chance de evitar o ataque.");
-                        jogador.ac += 2;
+                        jogador.setAc(jogador.getAc() + 2);
                         break;
                     case 3:
                         if (jogador.temItem) {
                             System.out.println("\nVocê usa um item (Poção de Cura) e recupera 10 HP.");
-                            jogador.hp += 10;
+                            inimigo.setHp(inimigo.getHp() + 10);
                             jogador.temItem = false;
                         } else {
                             System.out.println("\nVocê não tem itens para usar.");
@@ -159,13 +165,13 @@ public class Combate {
             }
 
             inimigoAtacar();
-            System.out.println("Inimigo: " + inimigo.hp + " HP restantes.");
-            System.out.println("Você: " + jogador.hp + " HP restantes.");
+            System.out.println("model.Inimigo: " + inimigo.getHp() + " HP restantes.");
+            System.out.println("Você: " + jogador.getHp() + " HP restantes.");
         }
 
-        if (jogador.hp <= 0) {
+        if (jogador.getHp() <= 0) {
             System.out.println("\nVocê foi derrotado... Tente novamente.");
-        } else if (inimigo.hp <= 0) {
+        } else if (inimigo.getHp() <= 0) {
             System.out.println("\nVocê derrotou o inimigo!");
         }
     }
@@ -174,7 +180,7 @@ public class Combate {
         Random rand = new Random();
         int dano = rand.nextInt(6) + 4;
         System.out.println("O inimigo ataca e causa " + dano + " de dano!");
-        jogador.hp -= dano;
+        inimigo.setHp(inimigo.getHp() - dano);
     }
 
     public void tentarFugir() {
