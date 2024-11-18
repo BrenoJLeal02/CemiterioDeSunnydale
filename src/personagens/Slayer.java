@@ -1,8 +1,12 @@
+package personagens;
+
+import inimigos.Inimigo;
+
 import java.util.Random;
 
 public class Slayer extends Personagem {
     public Slayer(String name) {
-        super(name, "Humano", "Guerreiro", 45, 16, 30,
+        super(name, "Humano", "Guerreiro", 45, 16,
                 new String[]{"Ataque Poderoso", "Defesa Sólida", "Intimidação"}, "Leal Neutro");
     }
     @Override
@@ -15,7 +19,7 @@ public class Slayer extends Personagem {
         Random rand = new Random();
         int dano = rand.nextInt(12) + 8;
         System.out.println("\nVocê usa seu Ataque Poderoso e causa " + dano + " de dano no inimigo!");
-        inimigo.hp -= dano;
+        inimigo.setHp(inimigo.getHp() - dano);
     }
 
     public void defesaSolida() {
@@ -28,7 +32,7 @@ public class Slayer extends Personagem {
         int chance = rand.nextInt(2);
         if (chance == 0) {
             System.out.println("O inimigo fica intimidado, e seus ataques causam menos dano nos próximos turnos.");
-            inimigo.dano = Math.max(0, inimigo.dano - 2);
+            inimigo.setDano(Math.max(0, inimigo.getDano() - 2));
         } else {
             System.out.println("O inimigo não se intimida e continua com sua força total!");
         }

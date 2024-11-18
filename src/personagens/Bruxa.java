@@ -1,9 +1,12 @@
+package personagens;
+
+import inimigos.Inimigo;
+
 import java.util.Random;
 
-public class BruxaPoderosa extends Personagem {
-    public BruxaPoderosa(String name) {
-        super(name, "Humano", "Feiticeira", 40, 12, 30,
-                new String[]{"Encantamento", "Necromancia", "Ilusão"}, "Caótica Boa");
+public class Bruxa extends Personagem {
+    public Bruxa(String name) {
+        super(name, "Humano", "Feiticeira", 40, 12, new String[]{"Encantamento", "Necromancia", "Ilusão"}, "Caótica Boa");
     }
 
     @Override
@@ -16,14 +19,14 @@ public class BruxaPoderosa extends Personagem {
         Random rand = new Random();
         int dano = rand.nextInt(8) + 5;
         System.out.println("\nVocê usa seu Encantamento e causa " + dano + " de dano no inimigo!");
-        inimigo.hp -= dano;
+        inimigo.setHp(inimigo.getHp() - dano);
     }
 
     public void necromancia(Inimigo inimigo) {
         Random rand = new Random();
         int dano = rand.nextInt(10) + 7;
         System.out.println("\nVocê usa a Necromancia, invocando energia das trevas e causando " + dano + " de dano!");
-        inimigo.hp -= dano;
+        inimigo.setHp(inimigo.getHp() - dano);
     }
 
     public void ilusao(Inimigo inimigo) {
