@@ -1,14 +1,16 @@
 package personagens;
 
-
+import inimigos.Inimigo;
 //import main.Combate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static utils.GameUtils.*;
+import static utils.GameUtils.limparConsole;
 
-
-public abstract class Personagem {
+public class Personagem {
     String nome;
     String race;
     String classType;
@@ -17,6 +19,7 @@ public abstract class Personagem {
     String[] skills;
     String alignment;
     boolean temItem = false;
+    List<String> mochila;
 
     public String getNome() {
         return nome;
@@ -34,8 +37,8 @@ public abstract class Personagem {
         this.ac = ac;
     }
 
-    public String[] getSkills() {
-        return skills;
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
     public Personagem(String nome, String race, String classType, int hp, int ac, String[] skills, String alignment) {
@@ -46,6 +49,7 @@ public abstract class Personagem {
         this.ac = ac;
         this.skills = skills;
         this.alignment = alignment;
+        this.mochila = new ArrayList<>();
     }
 
     public void displayStats(Personagem personagem) {
@@ -123,8 +127,6 @@ public abstract class Personagem {
         System.out.println("Agora, com novos recursos em mãos, você se sente mais preparado para enfrentar o que quer que esteja à frente.");
         temItem = true;
     }
-
-
 
 //    public void seguirEmFrente() {
 //        System.out.println("\nVocê decide seguir em frente, sem hesitar. O caminho à frente é sombrio e denso, mas você sente uma estranha energia no ar.");

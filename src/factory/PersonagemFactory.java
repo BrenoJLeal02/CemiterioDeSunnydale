@@ -22,9 +22,9 @@ public class PersonagemFactory {
                 case 1:
                     return new Bruxa(nome);
                 case 2:
-                    return new Slayer (nome);
+                    return new Slayer(nome);
                 case 3:
-                    return new Vampiro (nome);
+                    return new Vampiro(nome);
                 case 4:
                     System.out.println("Saindo do jogo...");
                     return null;

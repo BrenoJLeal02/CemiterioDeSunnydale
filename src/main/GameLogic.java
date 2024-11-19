@@ -42,7 +42,7 @@ public class GameLogic {
     }
     private static void continueJourney() {
         System.out.println("A aventura ainda está em desenvolvimento...");
-        continuarHistoria();
+        isRunning = false;
     }
     public static void startGame() {
         limparConsole();

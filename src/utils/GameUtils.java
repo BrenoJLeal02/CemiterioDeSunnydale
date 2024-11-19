@@ -40,7 +40,7 @@ public class GameUtils {
         printSeparador(30);
     }
     public static void printMenu() {
-
+        limparConsole();
         System.out.println("Escolha suas ações:");
         printSeparador(20);
         System.out.println("(1) Continuar jornada");

@@ -1,71 +1,93 @@
 package command;
 
-import personagens.Bruxa;
-import personagens.Personagem;
 import inimigos.Inimigo;
-import personagens.Slayer;
-import personagens.Vampiro;
-import utils.GameUtils;
+import personagens.*;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class AtacarCommand {
 
-    public static void executar(Personagem personagem, Inimigo inimigo) {
-        // Verificar se o personagem está vivo e se o inimigo está vivo
-        if (personagem.getHp() <= 0) {
-            System.out.println(personagem.getNome() + " não pode atacar, pois está sem HP!");
-            return;
+    public void executarAtaque(Personagem jogador, Inimigo inimigo) {
+        Scanner scanner = new Scanner(System.in);
+
+        if (jogador instanceof Slayer) {
+            Slayer slayer = (Slayer) jogador;
+            System.out.println("Escolha um tipo de ataque:");
+            System.out.println("1. Ataque Poderoso");
+            System.out.println("2. Defesa Sólida");
+            System.out.println("3. Intimidação");
+            System.out.print("Digite sua escolha: ");
+            int escolha = scanner.nextInt();
+            switch (escolha) {
+                case 1:
+                    slayer.ataquePoderoso(inimigo);
+                    break;
+                case 2:
+                    slayer.defesaSolida();
+                    break;
+                case 3:
+                    slayer.intimidacao(inimigo);
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        } else if (jogador instanceof Bruxa) {
+            Bruxa bruxa = (Bruxa) jogador;
+            System.out.println("Escolha um tipo de ataque:");
+            System.out.println("1. Encantamento");
+            System.out.println("2. Necromancia");
+            System.out.println("3. Ilusão");
+            System.out.print("Digite sua escolha: ");
+            int escolha = scanner.nextInt();
+            switch (escolha) {
+                case 1:
+                    bruxa.encantamento(inimigo);
+                    break;
+                case 2:
+                    bruxa.necromancia(inimigo);
+                    break;
+                case 3:
+                    bruxa.ilusao(inimigo);
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        } else if (jogador instanceof Vampiro) {
+            Vampiro vampiro = (Vampiro) jogador;
+            System.out.println("Escolha um tipo de ataque:");
+            System.out.println("1. Golpe Vampírico");
+            System.out.println("2. Regeneração");
+            System.out.println("3. Hipnose");
+            System.out.print("Digite sua escolha: ");
+            int escolha = scanner.nextInt();
+            switch (escolha) {
+                case 1:
+                    vampiro.golpeVampirico(inimigo);
+                    break;
+                case 2:
+                    vampiro.regeneracao();
+                    break;
+                case 3:
+                    vampiro.hipnose(inimigo);
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
         }
-        if (inimigo.getHp() <= 0) {
-            System.out.println("O inimigo já foi derrotado!");
-            return;
-        }
 
-        // Exibir as habilidades do personagem
-        System.out.println("Escolha uma habilidade para atacar:");
-        String[] habilidades = personagem.getSkills();
-        for (int i = 0; i < habilidades.length; i++) {
-            System.out.println("(" + (i + 1) + ") " + habilidades[i]);
-        }
+        // Ataque do inimigo após o ataque do jogador
+        inimigoAtacar(jogador, inimigo);
+    }
 
-        // Solicitar a escolha da habilidade
-        int escolha = GameUtils.readInt("-> ", habilidades.length);
-
-        // Executar o ataque com base na habilidade escolhida
-        switch (escolha) {
-            case 1: // Exemplo de ataque: Ataque Poderoso / Golpe Vampírico / Encantamento
-                if (personagem instanceof Slayer) {
-                    ((Slayer) personagem).ataquePoderoso(inimigo);
-                } else if (personagem instanceof Vampiro) {
-                    ((Vampiro) personagem).golpeVampirico(inimigo);
-                } else if (personagem instanceof Bruxa) {
-                    ((Bruxa) personagem).encantamento(inimigo);
-                }
-                break;
-
-            case 2: // Exemplo de defesa ou habilidade de cura: Defesa Sólida / Regeneração / Necromancia
-                if (personagem instanceof Slayer) {
-                    ((Slayer) personagem).defesaSolida();
-                } else if (personagem instanceof Vampiro) {
-                    ((Vampiro) personagem).regeneracao();
-                } else if (personagem instanceof Bruxa) {
-                    ((Bruxa) personagem).necromancia(inimigo);
-                }
-                break;
-
-            case 3: // Exemplo de habilidade de controle: Intimidação / Hipnose / Ilusão
-                if (personagem instanceof Slayer) {
-                    ((Slayer) personagem).intimidacao(inimigo);
-                } else if (personagem instanceof Vampiro) {
-                    ((Vampiro) personagem).hipnose(inimigo);
-                } else if (personagem instanceof Bruxa) {
-                    ((Bruxa) personagem).ilusao(inimigo);
-                }
-                break;
-
-            default:
-                System.out.println("Opção inválida! Tente novamente.");
-        }
+    // Método para o inimigo atacar após o ataque do jogador
+    public void inimigoAtacar(Personagem jogador, Inimigo inimigo) {
+        Random rand = new Random();
+        int dano = rand.nextInt(6) + 4;  // O inimigo causa dano entre 4 e 9
+        System.out.println("O inimigo ataca e causa " + dano + " de dano!");
+        jogador.setHp(jogador.getHp() - dano);
     }
 }

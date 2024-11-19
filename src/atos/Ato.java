@@ -15,6 +15,4 @@ public abstract class Ato {
     }
 
     public abstract void iniciar(Personagem jogador);
-
-
 }
