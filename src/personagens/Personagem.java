@@ -15,6 +15,7 @@ public class Personagem {
     String race;
     String classType;
     int hp;
+    int maxHp;
     int ac;
     String[] skills;
     String alignment;
@@ -37,8 +38,17 @@ public class Personagem {
         this.ac = ac;
     }
 
+    public int getMaxHp() {
+        return maxHp;
+    }
+
     public void setHp(int hp) {
-        this.hp = hp;
+
+        this.hp = Math.min(hp, maxHp);
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
     }
 
     public Personagem(String nome, String race, String classType, int hp, int ac, String[] skills, String alignment) {
@@ -46,6 +56,7 @@ public class Personagem {
         this.race = race;
         this.classType = classType;
         this.hp = hp;
+        this.maxHp = hp;
         this.ac = ac;
         this.skills = skills;
         this.alignment = alignment;

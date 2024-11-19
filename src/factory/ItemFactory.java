@@ -1,23 +1,29 @@
 package factory;
 
+import itens.*;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class ItemFactory {
-    private static Map<String, String> itens = new HashMap<>();
 
+    private static final Map<String, Supplier<Item>> registry = new HashMap<>();
 
     static {
-        itens.put("Poção de Cura", "Recupera 10 HP");
-        itens.put("Poção de Mana", "Recupera 10 MP");
-        itens.put("Elixir de Força", "Aumenta o dano em 5 por 3 turnos");
+        registry.put("poção de cura", PocaoCura::new);
+//        registry.put("elixir de força", ElixirForca::new);
     }
 
-    // Método para criar um item específico
-    public static String criarItem(String nomeItem) {
-        if (itens.containsKey(nomeItem)) {
-            return nomeItem + " - " + itens.get(nomeItem);
+    public static Item criarItem(String nomeItem) {
+        Supplier<Item> constructor = registry.get(nomeItem.toLowerCase());
+        if (constructor == null) {
+            throw new IllegalArgumentException("Item desconhecido: " + nomeItem);
         }
-        return null;
+        return constructor.get();
+    }
+
+    public static void registrarItem(String nomeItem, Supplier<Item> constructor) {
+        registry.put(nomeItem.toLowerCase(), constructor);
     }
 }

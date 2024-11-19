@@ -9,11 +9,13 @@ import command.UsarItemCommand;
 import main.Combate; // Importar a classe Combate
 
 import static utils.GameUtils.continuarHistoria;
+import static utils.GameUtils.limparConsole;
 
 public class AtoUm {
 
     public static void iniciarAtoUm(Personagem jogador) {
         // Introdução ao cenário
+        limparConsole();
         System.out.println("Você acorda em uma pequena vila, o som de pássaros ecoa ao longe e o cheiro de madeira queimada preenche o ar.");
         System.out.println("À sua frente, a aldeia parece tranquila, mas algo em seus instintos lhe diz que algo não está certo.");
         System.out.println("A vila foi recentemente atacada por uma misteriosa força, e os aldeões estão em busca de heróis para defender seu lar.");

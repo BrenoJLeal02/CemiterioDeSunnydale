@@ -2,27 +2,27 @@ package command;
 
 import inimigos.Inimigo;
 import personagens.Personagem;
-import main.Combate;  // Importando a classe Combate
+import main.Combate;
 
 public class FugirCommand implements Command {
     private Personagem jogador;
     private Inimigo inimigo;
-    private Combate combate;  // Adicionar o combate para encerrar
+    private Combate combate;
 
     public FugirCommand(Personagem jogador, Inimigo inimigo, Combate combate) {
         this.jogador = jogador;
         this.inimigo = inimigo;
-        this.combate = combate;  // Inicializar o combate
+        this.combate = combate;
     }
 
     @Override
     public void execute() {
-        if (Math.random() < 0.5) { // Ajustar a chance de sucesso
+        if (Math.random() < 0.5) {
             System.out.println(jogador.getNome() + " conseguiu fugir do combate com " + inimigo.getNome() + "!");
-            combate.encerrarCombate();  // Encerrar o combate se a fuga for bem-sucedida
+            combate.encerrarCombate();
         } else {
             System.out.println(jogador.getNome() + " falhou ao tentar fugir. O inimigo atacou!");
-            int dano = 5; // Ajuste o valor do dano
+            int dano = 5;
             jogador.setHp(jogador.getHp() - dano);
             System.out.println(jogador.getNome() + " levou " + dano + " de dano ao tentar fugir!");
         }
