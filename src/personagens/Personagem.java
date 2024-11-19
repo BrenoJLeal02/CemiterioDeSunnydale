@@ -1,13 +1,14 @@
 package personagens;
 
-import inimigos.Inimigo;
+
 //import main.Combate;
 
 import java.util.Scanner;
 
-import static utils.GameUtils.limparConsole;
+import static utils.GameUtils.*;
 
-public class Personagem {
+
+public abstract class Personagem {
     String nome;
     String race;
     String classType;
@@ -33,6 +34,10 @@ public class Personagem {
         this.ac = ac;
     }
 
+    public String[] getSkills() {
+        return skills;
+    }
+
     public Personagem(String nome, String race, String classType, int hp, int ac, String[] skills, String alignment) {
         this.nome = nome;
         this.race = race;
@@ -44,10 +49,12 @@ public class Personagem {
     }
 
     public void displayStats(Personagem personagem) {
-        System.out.println("Nome: " + personagem.nome);
-        System.out.println("Raça: " + personagem.race);
-        System.out.println("Classe: " + personagem.classType);
-        System.out.println("Pontos de Vida (HP): " + personagem.hp);
+        limparConsole();
+        printTitulo("STATUS DO PERSONAGEM");
+        System.out.println("HP: " + personagem.hp + "\nNome: " + personagem.nome );
+        printSeparador(20);
+        System.out.println("Raça: " + personagem.race + "\nClasse: " + personagem.classType);
+        printSeparador(20);
         System.out.println("Classe de Armadura (CA): " + personagem.ac);
         System.out.print("Habilidades: ");
         for (String skill : personagem.skills) {
@@ -55,13 +62,16 @@ public class Personagem {
         }
         System.out.println();
         System.out.println("Tendência: " + personagem.alignment);
+        printSeparador(20);
+        continuarHistoria();
+        limparConsole();
     }
 
     public void iniciarNarrativa() {
         System.out.println("Você se encontra em uma terra desconhecida, com seu destino incerto...");
         System.out.println("Agora, com seu nome " + nome + ", você está pronto para começar sua jornada!");
         System.out.println("Prepare-se, aventureiro...");
-        escolhaDeAcao();
+//        escolhaDeAcao();
     }
 
     public void escolhaDeAcao() {
@@ -113,6 +123,8 @@ public class Personagem {
         System.out.println("Agora, com novos recursos em mãos, você se sente mais preparado para enfrentar o que quer que esteja à frente.");
         temItem = true;
     }
+
+
 
 //    public void seguirEmFrente() {
 //        System.out.println("\nVocê decide seguir em frente, sem hesitar. O caminho à frente é sombrio e denso, mas você sente uma estranha energia no ar.");

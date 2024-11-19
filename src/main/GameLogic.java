@@ -3,6 +3,7 @@ package main;
 import atos.AtoUm;
 import factory.PersonagemFactory;
 import inimigos.Inimigo;
+import personagens.Bruxa;
 import personagens.Personagem;
 import state.GameState;
 import utils.GameUtils;
@@ -27,7 +28,6 @@ public class GameLogic {
             switch (input) {
                 case 1:
                     continueJourney();
-//                    Historia.
                     break;
                 case 2:
                     limparConsole();
@@ -45,8 +45,6 @@ public class GameLogic {
         continuarHistoria();
     }
     public static void startGame() {
-
-
         limparConsole();
         printSeparador(40);
         printSeparador(30);
@@ -74,15 +72,14 @@ public class GameLogic {
         limparConsole();
         // Escolher o personagem usando a fábrica
         personagem = PersonagemFactory.escolherEInstanciarPersonagem(nome);
-
         limparConsole();
         printTitulo("Bem-vindo ao jogo, " + personagem.getNome() + "!");
-
-
+        personagem.iniciarNarrativa();
+        continuarHistoria();
 
         // Inicia o loop principal do jogo
         isRunning = true;
-        limparConsole();
+
         gameLoop();
 
 

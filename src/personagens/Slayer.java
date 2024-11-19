@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Slayer extends Personagem {
     public Slayer(String name) {
-        super(name, "Humano", "Guerreiro", 45, 16,
+        super(name, "Humano", "Slayer", 45, 16,
                 new String[]{"Ataque Poderoso", "Defesa Sólida", "Intimidação"}, "Leal Neutro");
     }
     @Override
