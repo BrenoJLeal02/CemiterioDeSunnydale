@@ -17,16 +17,17 @@ public class UsarItemCommand implements Command {
         this.itens = new ArrayList<>(); // Inicializa a lista de itens
     }
 
-    // Método para adicionar um item à mochila do jogador
+    // adiciona itens diretamente na mochila
     public void adicionarItem(String nomeItem) {
         try {
-            Item item = ItemFactory.criarItem(nomeItem); // Cria o item usando a fábrica
-            itens.add(item); // Adiciona o item à lista
-            System.out.println("Item adicionado à mochila: " + item.getNome());
+            Item item = ItemFactory.criarItem(nomeItem);
+            jogador.adicionarItemNaMochila(item); // Adiciona à mochila do personagem
+            System.out.println("Item adicionado à mochila do personagem: " + item.getNome());
         } catch (IllegalArgumentException e) {
             System.out.println("Item não reconhecido: " + nomeItem);
         }
     }
+
 
     // Exibe os itens disponíveis na mochila
     public void visualizarItens() {

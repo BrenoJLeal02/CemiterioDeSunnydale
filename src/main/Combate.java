@@ -79,4 +79,6 @@ public class Combate {
     public void encerrarCombate() {
         this.combateAtivo = false;  // Define o combate como não ativo
     }
+
+    //Seria bom criar um metodo de drop de itens no combate para adicionar coisas na mochila
 }

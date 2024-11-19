@@ -75,8 +75,9 @@ public class GameLogic {
         limparConsole();
         printTitulo("Bem-vindo ao jogo, " + personagem.getNome() + "!");
         personagem.iniciarNarrativa();
+
         continuarHistoria();
-        AtoUm.iniciarAtoUm(personagem);
+        AtoUm.iniciarAtoUm(personagem);//Apenas um exemplo para testar o combate
         // Inicia o loop principal do jogo
         isRunning = true;
 

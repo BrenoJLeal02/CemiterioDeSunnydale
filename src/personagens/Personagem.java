@@ -1,6 +1,7 @@
 package personagens;
 
 import inimigos.Inimigo;
+import itens.Item;
 //import main.Combate;
 
 import java.util.ArrayList;
@@ -62,6 +63,13 @@ public class Personagem {
         this.alignment = alignment;
         this.mochila = new ArrayList<>();
     }
+    //como é uma ação do personagem, acho que faz mais sentido deixar aqui
+    //Seria bom criar um metodo de drop de itens no combate para adicionar coisas na mochila
+    public void adicionarItemNaMochila(Item item) {
+        mochila.add(item.getNome());
+        System.out.println("Item adicionado à mochila do personagem: " + item.getNome());
+    }
+
 
     public void displayStats(Personagem personagem) {
         limparConsole();
