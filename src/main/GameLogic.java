@@ -17,8 +17,35 @@ public class GameLogic {
     private static boolean isRunning = false;
     static Scanner scanner = new Scanner(System.in);
 
+
+
+    public static void gameLoop() {
+        while (isRunning) {
+            printMenu();
+            int input = readInt("-> ", 3);
+
+            switch (input) {
+                case 1:
+                    continueJourney();
+//                    Historia.
+                    break;
+                case 2:
+                    limparConsole();
+                    personagem.displayStats(personagem);
+                    break;
+                case 3:
+                    System.out.println("Obrigado por jogar! Até a próxima.");
+                    isRunning = false;
+                    break;
+            }
+        }
+    }
+    private static void continueJourney() {
+        System.out.println("A aventura ainda está em desenvolvimento...");
+        continuarHistoria();
+    }
     public static void startGame() {
-        isRunning = true;
+
 
         limparConsole();
         printSeparador(40);
@@ -44,43 +71,21 @@ public class GameLogic {
             if (input == 1)
                 nameSet = true;
         } while (!nameSet);
-
+        limparConsole();
         // Escolher o personagem usando a fábrica
         personagem = PersonagemFactory.escolherEInstanciarPersonagem(nome);
 
-        if (personagem == null) {
-            System.out.println("Jogo encerrado.");
-            isRunning = false;
-            return;
-        }
-
-        // Exibir mensagem de boas-vindas
         limparConsole();
         printTitulo("Bem-vindo ao jogo, " + personagem.getNome() + "!");
-        personagem.displayStats(personagem);
 
-        // Loop principal do jogo
-        while (isRunning) {
-            printTitulo("O que você gostaria de fazer?");
-            System.out.println("(1) Ver status do personagem");
-            System.out.println("(2) Continuar a aventura");
-            System.out.println("(3) Sair do jogo");
-            int input = readInt("-> ", 3);
 
-            switch (input) {
-                case 1:
-                    personagem.displayStats(personagem);
-                    break;
-                case 2:
-                    System.out.println("A aventura ainda está em desenvolvimento...");
-                    continuarHistoria();
-                    break;
-                case 3:
-                    System.out.println("Obrigado por jogar! Até a próxima.");
-                    isRunning = false;
-                    break;
-            }
-        }
+
+        // Inicia o loop principal do jogo
+        isRunning = true;
+        limparConsole();
+        gameLoop();
+
+
     }
 
 
@@ -89,9 +94,6 @@ public class GameLogic {
         //definir o ato atual (padrão state)
     }
 
-    private static void gameLoop() {
-        //ajustar
-    }
 
     private static void proximoAto() {
         // lógica de mudar ato

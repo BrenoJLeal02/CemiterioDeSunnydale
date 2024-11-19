@@ -4,12 +4,6 @@ import java.util.Scanner;
 
 public class GameUtils {
 
-    public static String getPlayerName() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o nome do seu personagem: ");
-        return scanner.nextLine();
-    }
-
     public static int readInt(String prompt, int userChoices) {
         Scanner scanner = new Scanner(System.in);
         int input;
@@ -45,7 +39,14 @@ public class GameUtils {
         System.out.println(title);
         printSeparador(30);
     }
+    public static void printMenu() {
 
+        System.out.println("Escolha suas ações:");
+        printSeparador(20);
+        System.out.println("(1) Continuar jornada");
+        System.out.println("(2) Status do Personagem");
+        System.out.println("(3) Sair do jogo");
+    }
     //Para o jogo até o usuário digitar algo e dar enter
     public static void continuarHistoria() {
         Scanner scanner = new Scanner(System.in);

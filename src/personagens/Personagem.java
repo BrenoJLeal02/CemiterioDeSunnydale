@@ -5,6 +5,8 @@ import inimigos.Inimigo;
 
 import java.util.Scanner;
 
+import static utils.GameUtils.limparConsole;
+
 public class Personagem {
     String nome;
     String race;

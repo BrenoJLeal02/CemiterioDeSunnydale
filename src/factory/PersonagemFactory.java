@@ -7,6 +7,7 @@ import personagens.Vampiro;
 
 import java.util.Scanner;
 
+import static utils.GameUtils.limparConsole;
 import static utils.GameUtils.readInt;
 
 public class PersonagemFactory {
