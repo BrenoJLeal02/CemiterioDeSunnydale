@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Vampiro extends Personagem {
     public Vampiro(String nome) {
-        super(nome, "FactoryPersonagem.Vampiro", "Caçador Sanguíneo", 50, 14, new String[]{"Golpe Vampírico", "Regeneração", "Hipnose"}, "Neutro Maligno");
+        super(nome, "Vampiro", "Caçador Sanguíneo", 50, 14, new String[]{"Golpe Vampírico", "Regeneração", "Hipnose"}, "Neutro Maligno");
     }
 
     public void golpeVampirico(Inimigo inimigo) {
