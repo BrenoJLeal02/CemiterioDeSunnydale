@@ -4,7 +4,7 @@ import command.AtacarCommand;
 import command.FugirCommand;
 import command.UsarItemCommand;
 import inimigos.Inimigo;
-import personagens.*;
+import personagens.Personagem;
 
 import java.util.Scanner;
 
@@ -14,23 +14,20 @@ public class Combate {
     private AtacarCommand ataqueCommand;
     private FugirCommand fugirCommand;
     private UsarItemCommand usarItemCommand;
+    private boolean combateAtivo;  // Variável para controlar se o combate está ativo
 
     public Combate(Personagem jogador, Inimigo inimigo) {
         this.jogador = jogador;
         this.inimigo = inimigo;
         this.ataqueCommand = new AtacarCommand();
-        this.fugirCommand = new FugirCommand(jogador, inimigo);
+        this.fugirCommand = new FugirCommand(jogador, inimigo, this); // Passando o combate para o FugirCommand
         this.usarItemCommand = new UsarItemCommand(jogador);
-
-        // Adicionar alguns itens à mochila do jogador
-        usarItemCommand.adicionarItem("Poção de Cura");
-        usarItemCommand.adicionarItem("Poção de Mana");
-        usarItemCommand.adicionarItem("Elixir de Força");
+        this.combateAtivo = true;  // O combate começa ativo
     }
 
     public void iniciarCombate() {
         Scanner scanner = new Scanner(System.in);
-        while (jogador.getHp() > 0 && inimigo.getHp() > 0) {
+        while (combateAtivo && jogador.getHp() > 0 && inimigo.getHp() > 0) {
             System.out.println("\nSua vez de agir!");
             System.out.println("1. Atacar");
             System.out.println("2. Defender");
@@ -66,10 +63,20 @@ public class Combate {
         } else if (inimigo.getHp() <= 0) {
             System.out.println("\nVocê derrotou o inimigo!");
         }
+
+        // Encerramento do combate
+        if (!combateAtivo) {
+            System.out.println("\nVocê fugiu do combate.");
+        }
     }
 
     public void defender() {
         System.out.println("\nVocê se prepara para a defesa, aumentando sua chance de evitar o ataque.");
         jogador.setAc(jogador.getAc() + 2);
+    }
+
+    // Método para encerrar o combate
+    public void encerrarCombate() {
+        this.combateAtivo = false;  // Define o combate como não ativo
     }
 }

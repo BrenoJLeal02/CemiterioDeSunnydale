@@ -1,7 +1,14 @@
 package atos;
 
-import personagens.Personagem;
+import inimigos.DemonioBasico;
 import inimigos.Inimigo;
+import personagens.Personagem;
+import command.AtacarCommand;
+import command.FugirCommand;
+import command.UsarItemCommand;
+import main.Combate; // Importar a classe Combate
+
+import static utils.GameUtils.continuarHistoria;
 
 public class AtoUm {
 
@@ -12,45 +19,22 @@ public class AtoUm {
         System.out.println("A vila foi recentemente atacada por uma misteriosa força, e os aldeões estão em busca de heróis para defender seu lar.");
 
         // Apresentação do primeiro inimigo
-        Inimigo inimigo = new Inimigo("Ladino Sombrio", 30, 8, 4); // Exemplo de inimigo, você pode personalizar
-        System.out.println("De repente, você ouve passos pesados atrás de você. Um Ladino Sombrio emerge da floresta, com olhos brilhando em vermelho.");
+        DemonioBasico inimigo = new DemonioBasico("Demonio Básico", 50, 10, 6);
+        System.out.println("De repente, você ouve passos pesados atrás de você. Um " + inimigo.getNome() + " emerge da floresta, com olhos brilhando em vermelho.");
 
-        // Opções de ação para o jogador
-        System.out.println("O inimigo está se aproximando! O que você faz?");
-        System.out.println("1. Atacar o inimigo!");
-        System.out.println("2. Tentar fugir!");
-        System.out.println("3. Usar um item!");
+        // Criando o combate
+        Combate combate = new Combate(jogador, inimigo); // Instancia o combate
+        combate.iniciarCombate();  // Inicia o combate
 
-        // Entrada do jogador (simulando uma escolha)
-        int escolha = 1; // Aqui você pode capturar a escolha do jogador. Apenas um exemplo de ataque automático.
-
-        switch (escolha) {
-            case 1:
-                System.out.println("Você decide enfrentar o Ladino Sombrio com toda sua força!");
-                  // Exemplo de ataque, dependendo de como você estruturou seu código
-                break;
-            case 2:
-                System.out.println("Você tenta fugir, mas o Ladino Sombrio é rápido demais!");
-                // Implemente a fuga aqui, com chance de sucesso ou falha
-                break;
-            case 3:
-                System.out.println("Você decide usar um item (Poção de Cura)!");
-                // Aqui você pode adicionar a lógica de uso de itens
-                break;
-            default:
-                System.out.println("Escolha inválida! O inimigo ataca!");
-                break;
-        }
-
-        // Resultado do confronto
+        // Transição para o próximo ato, após o combate
         if (inimigo.getHp() <= 0) {
-            System.out.println("Você derrotou o Ladino Sombrio! A vila está um passo mais segura.");
+            System.out.println("Você derrotou o " + inimigo.getNome() +"! A vila está um passo mais segura.");
         } else {
             System.out.println("O inimigo ainda está de pé, mas você conseguiu um golpe decisivo!");
         }
 
-        // Transição para o próximo ato
-        System.out.println("Com o Ladino Sombrio derrotado, você se aproxima do ancião da vila para saber mais sobre os ataques misteriosos...");
-        // Prossiga com a narrativa ou missão para o próximo ato.
+        // Continuar com a narrativa
+        System.out.println("Com o " + inimigo.getNome() + " derrotado, você se aproxima do ancião da vila para saber mais sobre os ataques misteriosos...");
+        continuarHistoria();
     }
 }
