@@ -3,6 +3,8 @@ package personagens;
 import inimigos.Inimigo;
 //import main.Combate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Personagem {
@@ -14,6 +16,7 @@ public class Personagem {
     String[] skills;
     String alignment;
     boolean temItem = false;
+    List<String> mochila;
 
     public String getNome() {
         return nome;
@@ -31,6 +34,10 @@ public class Personagem {
         this.ac = ac;
     }
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
     public Personagem(String nome, String race, String classType, int hp, int ac, String[] skills, String alignment) {
         this.nome = nome;
         this.race = race;
@@ -39,6 +46,7 @@ public class Personagem {
         this.ac = ac;
         this.skills = skills;
         this.alignment = alignment;
+        this.mochila = new ArrayList<>();
     }
 
     public void displayStats(Personagem personagem) {
