@@ -21,7 +21,7 @@ public class Personagem {
     String[] skills;
     String alignment;
     boolean temItem = false;
-    List<String> mochila;
+    List<Item> mochila;
 
     public String getNome() {
         return nome;
@@ -44,12 +44,15 @@ public class Personagem {
     }
 
     public void setHp(int hp) {
-
         this.hp = Math.min(hp, maxHp);
     }
 
     public void setMaxHp(int maxHp) {
         this.maxHp = maxHp;
+    }
+
+    public List<Item> getMochila() {
+        return mochila;
     }
 
     public Personagem(String nome, String race, String classType, int hp, int ac, String[] skills, String alignment) {
@@ -63,10 +66,11 @@ public class Personagem {
         this.alignment = alignment;
         this.mochila = new ArrayList<>();
     }
+
     //como é uma ação do personagem, acho que faz mais sentido deixar aqui
     //Seria bom criar um metodo de drop de itens no combate para adicionar coisas na mochila
     public void adicionarItemNaMochila(Item item) {
-        mochila.add(item.getNome());
+        mochila.add(item);
         System.out.println("Item adicionado à mochila do personagem: " + item.getNome());
     }
 

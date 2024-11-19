@@ -1,6 +1,5 @@
-package main;
+package game;
 
-import command.AtacarCommand;
 import command.FugirCommand;
 import command.UsarItemCommand;
 import inimigos.Inimigo;
@@ -11,7 +10,7 @@ import java.util.Scanner;
 public class Combate {
     private Personagem jogador;
     private Inimigo inimigo;
-    private AtacarCommand ataqueCommand;
+    private AtaqueHandler ataqueHandler;
     private FugirCommand fugirCommand;
     private UsarItemCommand usarItemCommand;
     private boolean combateAtivo;  // Variável para controlar se o combate está ativo
@@ -19,7 +18,7 @@ public class Combate {
     public Combate(Personagem jogador, Inimigo inimigo) {
         this.jogador = jogador;
         this.inimigo = inimigo;
-        this.ataqueCommand = new AtacarCommand();
+        this.ataqueHandler = new AtaqueHandler();
         this.fugirCommand = new FugirCommand(jogador, inimigo, this); // Passando o combate para o FugirCommand
         this.usarItemCommand = new UsarItemCommand(jogador);
         this.combateAtivo = true;  // O combate começa ativo
@@ -38,7 +37,7 @@ public class Combate {
 
             switch (escolha) {
                 case 1:
-                    ataqueCommand.executarAtaque(jogador, inimigo);
+                    ataqueHandler.atacar(jogador, inimigo);
                     break;
                 case 2:
                     defender();

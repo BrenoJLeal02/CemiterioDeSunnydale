@@ -1,12 +1,8 @@
 package atos;
 
 import inimigos.DemonioBasico;
-import inimigos.Inimigo;
 import personagens.Personagem;
-import command.AtacarCommand;
-import command.FugirCommand;
-import command.UsarItemCommand;
-import main.Combate; // Importar a classe Combate
+import game.Combate; // Importar a classe Combate
 
 import static utils.GameUtils.continuarHistoria;
 import static utils.GameUtils.limparConsole;

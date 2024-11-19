@@ -14,7 +14,7 @@ public class UsarItemCommand implements Command {
 
     public UsarItemCommand(Personagem jogador) {
         this.jogador = jogador;
-        this.itens = new ArrayList<>(); // Inicializa a lista de itens
+        this.itens = jogador.getMochila();
     }
 
     // adiciona itens diretamente na mochila

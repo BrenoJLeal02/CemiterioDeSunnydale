@@ -1,9 +1,8 @@
-package main;
+package game;
 
 import atos.AtoUm;
 import factory.PersonagemFactory;
 import inimigos.Inimigo;
-import personagens.Bruxa;
 import personagens.Personagem;
 import state.GameState;
 import utils.GameUtils;
@@ -17,8 +16,6 @@ public class GameLogic {
     private static GameState atoAtual;
     private static boolean isRunning = false;
     static Scanner scanner = new Scanner(System.in);
-
-
 
     public static void gameLoop() {
         while (isRunning) {
@@ -40,10 +37,12 @@ public class GameLogic {
             }
         }
     }
+
     private static void continueJourney() {
         System.out.println("A aventura ainda está em desenvolvimento...");
         isRunning = false;
     }
+
     public static void startGame() {
         limparConsole();
         printSeparador(40);
@@ -69,7 +68,9 @@ public class GameLogic {
             if (input == 1)
                 nameSet = true;
         } while (!nameSet);
+
         limparConsole();
+
         // Escolher o personagem usando a fábrica
         personagem = PersonagemFactory.escolherEInstanciarPersonagem(nome);
         limparConsole();
@@ -82,16 +83,12 @@ public class GameLogic {
         isRunning = true;
 
         gameLoop();
-
-
     }
-
 
 
     private static void setAtoAtual(GameState newAct) {
         //definir o ato atual (padrão state)
     }
-
 
     private static void proximoAto() {
         // lógica de mudar ato

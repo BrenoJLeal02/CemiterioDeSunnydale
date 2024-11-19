@@ -1,8 +1,14 @@
 package utils;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameUtils {
+
+    public int rolarDados() {
+        Random random = new Random();
+        return random.nextInt(20) + 1;
+    }
 
     public static int readInt(String prompt, int userChoices) {
         Scanner scanner = new Scanner(System.in);
@@ -39,6 +45,7 @@ public class GameUtils {
         System.out.println(title);
         printSeparador(30);
     }
+
     public static void printMenu() {
         limparConsole();
         System.out.println("Escolha suas ações:");
@@ -47,6 +54,7 @@ public class GameUtils {
         System.out.println("(2) Status do Personagem");
         System.out.println("(3) Sair do jogo");
     }
+
     //Para o jogo até o usuário digitar algo e dar enter
     public static void continuarHistoria() {
         Scanner scanner = new Scanner(System.in);

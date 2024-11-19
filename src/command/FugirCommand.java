@@ -2,7 +2,7 @@ package command;
 
 import inimigos.Inimigo;
 import personagens.Personagem;
-import main.Combate;
+import game.Combate;
 
 public class FugirCommand implements Command {
     private Personagem jogador;
