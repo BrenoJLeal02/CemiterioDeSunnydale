@@ -8,6 +8,7 @@ public class Inimigo {
     private int dano;
     private boolean hipnotizado;
 
+
     public Inimigo(String nome, int hp, int ac, int dano) {
         this.nome = nome;
         this.hp = hp;

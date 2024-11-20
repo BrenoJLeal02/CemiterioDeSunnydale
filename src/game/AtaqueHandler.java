@@ -113,7 +113,7 @@ public class AtaqueHandler {
             System.out.println("A Barreira Mágica está ativa! Você não sofre dano neste turno.");
             jogador.setBarreiraAtiva(jogador.getBarreiraAtiva() - 1); // Reduz a duração da barreira
         } else {
-            int dano = 10 - gameUtils.rolarDados();
+            int dano = 15 - gameUtils.rolarDados();
             System.out.println("O inimigo ataca e causa " + dano + " de dano!");
             jogador.setHp(jogador.getHp() - dano);
         }
