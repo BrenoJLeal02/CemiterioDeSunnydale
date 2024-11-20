@@ -21,6 +21,7 @@ public class HipnoseCommand implements Command {
             int dano = chance - 15;
             System.out.println("A hipnose tem sucesso! O inimigo está paralisado e não pode atacar por um turno. Você o atinge causando " + dano + " de dano!");
             inimigo.setHp(inimigo.getHp() - dano);
+            inimigo.setHipnotizado(true);
         } else if (chance < 5) {
             int dano = 6 - chance;
             System.out.println("A hipnose falha e o inimigo te ataca, tirando " + dano + " do seu HP!");

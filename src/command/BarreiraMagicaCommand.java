@@ -21,9 +21,9 @@ public class BarreiraMagicaCommand implements Command {
             System.out.println("\nVocê erra ao tentar utilizar a Barreira Mágica e aumenta o HP do inimigo em " + vida);
             inimigo.setHp(inimigo.getHp() + vida);
         } else {
-            int vida = chance + 2;
-            System.out.println("\nVocê cria uma Barreira Mágica e aumenta seu HP em " + vida + "!");
-            bruxa.setHp(bruxa.getHp() + vida);
+            bruxa.setBarreiraAtiva(2);
+            System.out.println("\nVocê cria uma Barreira Mágica que irá protegê-la por 2 turnos!");
         }
     }
+
 }

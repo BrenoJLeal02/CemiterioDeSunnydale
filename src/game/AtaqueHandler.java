@@ -101,13 +101,22 @@ public class AtaqueHandler {
             }
         }
 
-        inimigoAtacar(jogador);
+        inimigoAtacar(jogador, inimigo);
     }
 
-    // Método para o inimigo atacar após o turno do jogador
-    private void inimigoAtacar(Personagem jogador) {
-        int dano = 20 - gameUtils.rolarDados();
-        System.out.println("O inimigo ataca e causa " + dano + " de dano!");
-        jogador.setHp(jogador.getHp() - dano);
+
+    private void inimigoAtacar(Personagem jogador, Inimigo inimigo) {
+        if (inimigo.isHipnotizado()) {
+            System.out.println("O inimigo está hipnotizado e não pode atacar neste turno!");
+            inimigo.setHipnotizado(false);
+        } else if (jogador.getBarreiraAtiva() > 0) {
+            System.out.println("A Barreira Mágica está ativa! Você não sofre dano neste turno.");
+            jogador.setBarreiraAtiva(jogador.getBarreiraAtiva() - 1); // Reduz a duração da barreira
+        } else {
+            int dano = 10 - gameUtils.rolarDados();
+            System.out.println("O inimigo ataca e causa " + dano + " de dano!");
+            jogador.setHp(jogador.getHp() - dano);
+        }
     }
+
 }

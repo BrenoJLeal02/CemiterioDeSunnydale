@@ -12,8 +12,10 @@ public class ItemFactory {
 
     static {
         registry.put("poção de cura", PocaoCura::new);
-//        registry.put("elixir de força", ElixirForca::new);
+        registry.put("barreira protetora", BarreiraProtetora::new);
+//        registry.put("poção de força", PocaoForca::new);
     }
+
 
     public static Item criarItem(String nomeItem) {
         Supplier<Item> constructor = registry.get(nomeItem.toLowerCase());

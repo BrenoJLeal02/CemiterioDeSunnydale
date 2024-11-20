@@ -19,10 +19,18 @@ public class Personagem {
     int maxHp;
     int ac;
     String[] skills;
+    private int barreiraAtiva = 0;
     String alignment;
     boolean temItem = false;
     List<Item> mochila;
 
+    public int getBarreiraAtiva() {
+        return barreiraAtiva;
+    }
+
+    public void setBarreiraAtiva(int barreiraAtiva) {
+        this.barreiraAtiva = barreiraAtiva;
+    }
     public String getNome() {
         return nome;
     }

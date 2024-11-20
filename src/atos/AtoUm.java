@@ -3,6 +3,8 @@ package atos;
 import inimigos.DemonioBasico;
 import personagens.Personagem;
 import game.Combate; // Importar a classe Combate
+import game.ItemHandler; // Importar o ItemHandler
+import factory.ItemFactory;
 
 import static utils.GameUtils.continuarHistoria;
 import static utils.GameUtils.limparConsole;
@@ -15,6 +17,10 @@ public class AtoUm {
         System.out.println("Você acorda em uma pequena vila, o som de pássaros ecoa ao longe e o cheiro de madeira queimada preenche o ar.");
         System.out.println("À sua frente, a aldeia parece tranquila, mas algo em seus instintos lhe diz que algo não está certo.");
         System.out.println("A vila foi recentemente atacada por uma misteriosa força, e os aldeões estão em busca de heróis para defender seu lar.");
+
+        // Adicionar um item à mochila do personagem antes do combate
+        ItemHandler itemHandler = new ItemHandler(jogador);
+        itemHandler.adicionarItem("poção de cura");  // Adicionando um item à mochila
 
         // Apresentação do primeiro inimigo
         DemonioBasico inimigo = new DemonioBasico("Demonio Básico", 50, 10, 6);

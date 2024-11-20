@@ -29,9 +29,8 @@ public class Combate {
         while (combateAtivo && jogador.getHp() > 0 && inimigo.getHp() > 0) {
             System.out.println("\nSua vez de agir!");
             System.out.println("1. Atacar");
-            System.out.println("2. Defender");
-            System.out.println("3. Usar Itens");
-            System.out.println("4. Fugir");
+            System.out.println("2. Usar Itens");
+            System.out.println("3. Fugir");
             System.out.print("Escolha uma ação: ");
             int escolha = scanner.nextInt();
 
@@ -40,12 +39,9 @@ public class Combate {
                     ataqueHandler.atacar(jogador, inimigo);
                     break;
                 case 2:
-                    defender();
-                    break;
-                case 3:
                     usarItemCommand.execute();  // Executa o comando de usar item
                     break;
-                case 4:
+                case 3:
                     fugirCommand.execute();  // Executa o comando de fuga
                     break;
                 default:
@@ -69,14 +65,10 @@ public class Combate {
         }
     }
 
-    public void defender() {
-        System.out.println("\nVocê se prepara para a defesa, aumentando sua chance de evitar o ataque.");
-        jogador.setAc(jogador.getAc() + 2);
-    }
 
-    // Método para encerrar o combate
+
     public void encerrarCombate() {
-        this.combateAtivo = false;  // Define o combate como não ativo
+        this.combateAtivo = false;
     }
 
     //Seria bom criar um metodo de drop de itens no combate para adicionar coisas na mochila

@@ -6,12 +6,21 @@ public class Inimigo {
     private int hp;
     private int ac;
     private int dano;
+    private boolean hipnotizado;
 
     public Inimigo(String nome, int hp, int ac, int dano) {
         this.nome = nome;
         this.hp = hp;
         this.ac = ac;
         this.dano = dano;
+        this.hipnotizado = false;
+    }
+    public boolean isHipnotizado() {
+        return hipnotizado;
+    }
+
+    public void setHipnotizado(boolean hipnotizado) {
+        this.hipnotizado = hipnotizado;
     }
 
     // Getters e Setters
@@ -43,8 +52,8 @@ public class Inimigo {
         this.dano = dano;
     }
 
-    // Método para aplicar dano
     public void receberDano(int dano) {
         this.hp -= dano;
     }
+
 }
