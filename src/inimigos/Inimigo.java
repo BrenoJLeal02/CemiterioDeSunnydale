@@ -1,6 +1,9 @@
 // Classe Inimigo
 package inimigos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Inimigo {
     private String nome;
     private int hp;
@@ -56,5 +59,6 @@ public class Inimigo {
     public void receberDano(int dano) {
         this.hp -= dano;
     }
+
 
 }

@@ -1,27 +1,32 @@
 package game;
 
+import command.AdicionarItemCommand;
 import command.FugirCommand;
 import command.UsarItemCommand;
 import inimigos.Inimigo;
+import itens.Item;
 import personagens.Personagem;
 
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import factory.ItemFactory;
 
 public class Combate {
     private Personagem jogador;
     private Inimigo inimigo;
     private AtaqueHandler ataqueHandler;
     private FugirCommand fugirCommand;
-    private UsarItemCommand usarItemCommand;
-    private boolean combateAtivo;  // Variável para controlar se o combate está ativo
+    private ItemHandler itemHandler; // Agora usaremos o ItemHandler diretamente
+    private boolean combateAtivo;
 
     public Combate(Personagem jogador, Inimigo inimigo) {
         this.jogador = jogador;
         this.inimigo = inimigo;
         this.ataqueHandler = new AtaqueHandler();
-        this.fugirCommand = new FugirCommand(jogador, inimigo, this); // Passando o combate para o FugirCommand
-        this.usarItemCommand = new UsarItemCommand(jogador);
-        this.combateAtivo = true;  // O combate começa ativo
+        this.fugirCommand = new FugirCommand(jogador, inimigo, this);
+        this.itemHandler = new ItemHandler(jogador); // Instanciamos ItemHandler
+        this.combateAtivo = true;
     }
 
     public void iniciarCombate() {
@@ -29,20 +34,20 @@ public class Combate {
         while (combateAtivo && jogador.getHp() > 0 && inimigo.getHp() > 0) {
             System.out.println("\nSua vez de agir!");
             System.out.println("1. Atacar");
-            System.out.println("2. Usar Itens");
+            System.out.println("2. Mochila");
             System.out.println("3. Fugir");
             System.out.print("Escolha uma ação: ");
             int escolha = scanner.nextInt();
 
             switch (escolha) {
                 case 1:
-                    ataqueHandler.atacar(jogador, inimigo);
+                    ataqueHandler.atacar(jogador, inimigo); // Executa o ataque
                     break;
                 case 2:
-                    usarItemCommand.execute();  // Executa o comando de usar item
+                    itemHandler.interagirComItens();
                     break;
                 case 3:
-                    fugirCommand.execute();  // Executa o comando de fuga
+                    fugirCommand.execute();  // Executa a fuga
                     break;
                 default:
                     System.out.println("Opção inválida.");
@@ -57,19 +62,34 @@ public class Combate {
             System.out.println("\nVocê foi derrotado... Tente novamente.");
         } else if (inimigo.getHp() <= 0) {
             System.out.println("\nVocê derrotou o inimigo!");
+            dropItem();
         }
 
-        // Encerramento do combate
         if (!combateAtivo) {
             System.out.println("\nVocê fugiu do combate.");
         }
     }
 
+    private void dropItem() {
+        Random random = new Random();
+        int quantidadeItens = random.nextInt(3) + 1; // Gera entre 1 e 3 itens aleatórios
 
+        System.out.println("\nO inimigo deixou os seguintes itens:");
+        for (int i = 0; i < quantidadeItens; i++) {
+            // Cria um item aleatório
+            Item itemAleatorio = ItemFactory.criarItemAleatorio(); // Gera um item aleatório do registro
+
+            // Exibe o nome do item
+            System.out.println("- " + itemAleatorio.getNome());
+
+            // Adiciona o item à mochila usando o comando apropriado
+            AdicionarItemCommand adicionarItemCommand = new AdicionarItemCommand(jogador, itemAleatorio.getNome());
+            adicionarItemCommand.execute(); // Executa o comando para adicionar o item à mochila
+        }
+    }
 
     public void encerrarCombate() {
         this.combateAtivo = false;
     }
-
-    //Seria bom criar um metodo de drop de itens no combate para adicionar coisas na mochila
 }
+

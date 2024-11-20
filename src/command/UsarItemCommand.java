@@ -1,31 +1,22 @@
 package command;
 
-import game.ItemHandler;
 import personagens.Personagem;
-import java.util.Scanner;
+import itens.Item;
 
 public class UsarItemCommand implements Command {
-    private Personagem jogador;
-    private ItemHandler itemHandler;
 
-    public UsarItemCommand(Personagem jogador) {
+    private Personagem jogador;
+    private Item item;
+
+    public UsarItemCommand(Personagem jogador, Item item) {
         this.jogador = jogador;
-        this.itemHandler = new ItemHandler(jogador);
+        this.item = item;
     }
 
     @Override
     public void execute() {
-        itemHandler.visualizarItens();
-
-        if (jogador.getMochila().isEmpty()) {
-            System.out.println("Você não tem itens para usar!");
-            return;
-        }
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("\nEscolha um item para usar (digite o número correspondente): ");
-        int escolha = scanner.nextInt();
-
-        itemHandler.usarItem(escolha);
+        // Usando o item
+        System.out.println("\nVocê usou: " + item.getNome());
+        item.usar(jogador);
     }
 }

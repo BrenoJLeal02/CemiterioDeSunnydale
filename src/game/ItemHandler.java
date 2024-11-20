@@ -1,68 +1,55 @@
 package game;
 
 import personagens.Personagem;
+import command.*;
 import itens.Item;
-import factory.ItemFactory;
+
 import java.util.List;
+import java.util.Scanner;
 
 public class ItemHandler {
 
     private Personagem jogador;
+    private Scanner scanner;
 
     public ItemHandler(Personagem jogador) {
         this.jogador = jogador;
+        this.scanner = new Scanner(System.in);
     }
 
-    public void adicionarItem(String nomeItem) {
-        try {
-            Item item = ItemFactory.criarItem(nomeItem);
-            jogador.adicionarItemNaMochila(item);
-            System.out.println("Item adicionado à mochila: " + item.getNome());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Item desconhecido: " + nomeItem);
+    // Método para interagir com os itens do jogador
+    public void interagirComItens() {
+        // Exibe os itens na mochila
+        Command visualizarItemCommand = new VisualizarItemCommand(jogador); // Executa visualizar itens
+        visualizarItemCommand.execute();
+
+        // Solicita ao jogador escolher o item para usar
+        System.out.print("\nEscolha o número do item para usar ou 0 para voltar: ");
+        int escolha = scanner.nextInt();
+
+        if (escolha == 0) {
+            System.out.println("Voltando para o combate...");
+            return; // Volta para o combate sem fazer nada
         }
-    }
 
-    public void removerItem(Item item) {
-        if (jogador.getMochila().contains(item)) {
-            jogador.getMochila().remove(item);
-            System.out.println("Item " + item.getNome() + " removido da mochila.");
-        } else {
-            System.out.println("O item não está na mochila.");
-        }
-    }
-
-    public void visualizarItens() {
+        // Verifica se a escolha está dentro dos limites dos itens
         List<Item> itens = jogador.getMochila();
-        if (itens.isEmpty()) {
-            System.out.println("Sua mochila está vazia.");
-        } else {
-            System.out.println("\nItens disponíveis na mochila:");
-            for (int i = 0; i < itens.size(); i++) {
-                System.out.println((i + 1) + ". " + itens.get(i).getNome() + " - " + itens.get(i).getDescricao());
-            }
-        }
-    }
-
-    public void usarItem(int indice) {
-        List<Item> itens = jogador.getMochila();
-        if (itens.isEmpty()) {
-            System.out.println("Você não tem itens para usar!");
-            return;
-        }
-
-        if (indice < 1 || indice > itens.size()) {
+        if (escolha < 1 || escolha > itens.size()) {
             System.out.println("Opção inválida!");
             return;
         }
 
-        Item itemEscolhido = itens.get(indice - 1);
-        System.out.println("\nVocê usou: " + itemEscolhido.getNome());
+        // Pega o item escolhido
+        Item itemEscolhido = itens.get(escolha - 1);
 
-        itemEscolhido.usar(jogador);
+        // Executa o comando de usar o item
+        Command usarItemCommand = new UsarItemCommand(jogador, itemEscolhido); // Passa o item escolhido
+        usarItemCommand.execute();
 
+        // Se o item for consumível, executa o comando para remover o item
         if (itemEscolhido.isConsumivel()) {
-            removerItem(itemEscolhido);
+            Command removerItemCommand = new RemoverItemCommand(jogador, itemEscolhido.getNome()); // Remove o item
+            removerItemCommand.execute();
         }
     }
 }
