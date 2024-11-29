@@ -79,7 +79,7 @@ public class Personagem {
     //Seria bom criar um metodo de drop de itens no combate para adicionar coisas na mochila
     public void adicionarItemNaMochila(Item item) {
         mochila.add(item);
-        System.out.println("Item adicionado à mochila do personagem: " + item.getNome());
+
     }
 
 

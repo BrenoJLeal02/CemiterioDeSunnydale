@@ -2,8 +2,7 @@ package factory;
 
 import itens.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class ItemFactory {
@@ -13,9 +12,8 @@ public class ItemFactory {
     static {
         registry.put("poção de cura", PocaoCura::new);
         registry.put("barreira protetora", BarreiraProtetora::new);
-//        registry.put("poção de força", PocaoForca::new);
+        // registry.put("poção de força", PocaoForca::new);
     }
-
 
     public static Item criarItem(String nomeItem) {
         Supplier<Item> constructor = registry.get(nomeItem.toLowerCase());
@@ -24,8 +22,15 @@ public class ItemFactory {
         }
         return constructor.get();
     }
-
+    // ele é usado quando quiser registrar novos items quando programa começar
     public static void registrarItem(String nomeItem, Supplier<Item> constructor) {
         registry.put(nomeItem.toLowerCase(), constructor);
+    }
+
+    public static Item criarItemAleatorio() {
+        List<String> nomesItens = new ArrayList<>(registry.keySet()); // Obtém as chaves registradas
+        Random random = new Random();
+        String nomeAleatorio = nomesItens.get(random.nextInt(nomesItens.size())); // Escolhe uma chave aleatória
+        return criarItem(nomeAleatorio); // Cria o item com base na chave escolhida
     }
 }

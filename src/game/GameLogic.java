@@ -78,6 +78,7 @@ public class GameLogic {
         personagem.iniciarNarrativa();
 
         continuarHistoria();
+
         AtoUm.iniciarAtoUm(personagem);//Apenas um exemplo para testar o combate
         // Inicia o loop principal do jogo
         isRunning = true;
