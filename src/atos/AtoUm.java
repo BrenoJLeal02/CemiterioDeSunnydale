@@ -8,9 +8,13 @@ import game.ItemHandler;
 import static utils.GameUtils.continuarHistoria;
 import static utils.GameUtils.limparConsole;
 
-public class AtoUm {
+public class AtoUm extends Ato {
+    public AtoUm(Personagem personagem) {
+        super("Ato Um");
+    }
 
-    public static void iniciarAtoUm(Personagem jogador) {
+    @Override
+    public void iniciar(Personagem jogador) {
         // Criar o ItemHandler diretamente
         ItemHandler itemHandler = new ItemHandler(jogador);
 

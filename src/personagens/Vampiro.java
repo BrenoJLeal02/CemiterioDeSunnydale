@@ -7,7 +7,6 @@ public class Vampiro extends Personagem {
 
     @Override
     public void iniciarNarrativa() {
-        super.iniciarNarrativa();
         System.out.println("Você sente a sede de sangue em suas veias, e sua alma marcada pela maldição da imortalidade.");
         System.out.println("A noite é sua aliada, e você é um predador implacável no escuro.");
     }

@@ -8,7 +8,6 @@ public class Bruxa extends Personagem {
 
     @Override
     public void iniciarNarrativa() {
-        super.iniciarNarrativa();
         System.out.println("Como uma feiticeira poderosa, você sente uma energia mística pulsando em suas veias.");
         System.out.println("Você ouve murmúrios no ar, como se algo ou alguém estivesse observando você.");
     }

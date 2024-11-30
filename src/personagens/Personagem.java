@@ -11,7 +11,7 @@ import java.util.Scanner;
 import static utils.GameUtils.*;
 import static utils.GameUtils.limparConsole;
 
-public class Personagem {
+public abstract class Personagem {
     String nome;
     String race;
     String classType;
@@ -102,12 +102,7 @@ public class Personagem {
         limparConsole();
     }
 
-    public void iniciarNarrativa() {
-        System.out.println("Você se encontra em uma terra desconhecida, com seu destino incerto...");
-        System.out.println("Agora, com seu nome " + nome + ", você está pronto para começar sua jornada!");
-        System.out.println("Prepare-se, aventureiro...");
-//        escolhaDeAcao();
-    }
+    public abstract void iniciarNarrativa();
 
     public void escolhaDeAcao() {
         Scanner scanner = new Scanner(System.in);

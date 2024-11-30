@@ -7,7 +7,6 @@ public class Slayer extends Personagem {
 
     @Override
     public void iniciarNarrativa() {
-        super.iniciarNarrativa();
         System.out.println("A Caçadora é uma guerreira escolhida pelo destino para combater vampiros, demônios e criaturas sobrenaturais.");
         System.out.println("Com força sobre-humana, habilidades de combate excepcionais e coragem inabalável, ela luta sozinha contra as trevas, sempre disposta a proteger o mundo a qualquer custo.");
     }

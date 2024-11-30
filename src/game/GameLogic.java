@@ -1,5 +1,6 @@
 package game;
 
+import atos.Ato;
 import atos.AtoUm;
 import factory.PersonagemFactory;
 import inimigos.Inimigo;
@@ -53,7 +54,7 @@ public class GameLogic {
         printSeparador(40);
         continuarHistoria();
 
-        // Definir o nome do jogador
+
         String nome;
         boolean nameSet = false;
         do {
@@ -71,65 +72,20 @@ public class GameLogic {
 
         limparConsole();
 
-        // Escolher o personagem usando a fábrica
+
         personagem = PersonagemFactory.escolherEInstanciarPersonagem(nome);
         limparConsole();
         printTitulo("Bem-vindo ao jogo, " + personagem.getNome() + "!");
         personagem.iniciarNarrativa();
 
         continuarHistoria();
+        Ato atoUm = new AtoUm(personagem);
+        atoUm.iniciar(personagem);
 
-        AtoUm.iniciarAtoUm(personagem);//Apenas um exemplo para testar o combate
-        // Inicia o loop principal do jogo
         isRunning = true;
 
         gameLoop();
     }
 
 
-    private static void setAtoAtual(GameState newAct) {
-        //definir o ato atual (padrão state)
-    }
-
-    private static void proximoAto() {
-        // lógica de mudar ato
-    }
-
-    public static void batalha(Inimigo inimigo) {
-//        Command attackCommand = new AttackCommand(jogador, inimigo);
-//        Command usePotionCommand = new UsePotionCommand(jogador);
-//        Command runCommand = new RunCommand(jogador, inimigo);
-
-        while (true) {
-            int input = GameUtils.readInt("Escolha sua ação:\n(1) Lutar\n(2) Usar poção\n(3) Fugir -> ", 3);
-
-//            if (input == 1) {
-//                attackCommand.execute();
-//            } else if (input == 2) {
-//                usePotionCommand.execute();
-//            } else {
-//                runCommand.execute();
-//                if (runCommand.isSuccessful()) break;
-//            }
-
-            if (personagem.getHp() <= 0) {
-                jogadorMorreu();
-                break;
-            } else if (inimigo.getHp() <= 0) {
-                finalDeBatalha(inimigo);
-                break;
-            }
-        }
-    }
-
-    private static void finalDeBatalha(Inimigo inimigo) {
-        System.out.println("Você derrotou " + inimigo.getNome() + "!");
-        // usar a factory de itens pra presentear o jogador
-    }
-
-    // Método de utilidade para exibir a mensagem de morte do jogador
-    private static void jogadorMorreu() {
-        System.out.println("Você foi derrotado. Fim de jogo.");
-        isRunning = false;
-    }
 }
