@@ -4,13 +4,15 @@ import inimigos.DemonioBasico;
 import personagens.Personagem;
 import game.Combate;
 import game.ItemHandler;
+import state.GameState;
 
 import static utils.GameUtils.continuarHistoria;
 import static utils.GameUtils.limparConsole;
 
 public class AtoUm extends Ato {
-    public AtoUm(Personagem personagem) {
-        super("Ato Um");
+
+    public AtoUm(Personagem jogador, GameState gameState) {
+        super("Ato Um", gameState);  // Passa o GameState para o Ato
     }
 
     @Override
@@ -25,19 +27,19 @@ public class AtoUm extends Ato {
         System.out.println("A vila foi recentemente atacada por uma misteriosa força, e os aldeões estão em busca de heróis para defender seu lar.");
 
         // Adicionar uma Poção de Cura à mochila usando o ItemHandler
-        itemHandler.adicionarItem("poção de cura");  // Usando o método diretamente
+        itemHandler.adicionarItem("poção de cura");
 
         // Apresentação do primeiro inimigo
         DemonioBasico inimigo = new DemonioBasico("Demonio Básico", 50, 10, 6);
         System.out.println("De repente, você ouve passos pesados atrás de você. Um " + inimigo.getNome() + " emerge da floresta, com olhos brilhando em vermelho.");
 
         // Criando o combate
-        Combate combate = new Combate(jogador, inimigo); // Instancia o combate
-        combate.iniciarCombate();  // Inicia o combate
+        Combate combate = new Combate(jogador, inimigo, getGameState()); // Passando gameState para o Combate
+        combate.iniciarCombate();
 
         // Transição para o próximo ato, após o combate
         if (inimigo.getHp() <= 0) {
-            System.out.println("Você derrotou o " + inimigo.getNome() +"! A vila está um passo mais segura.");
+            System.out.println("Você derrotou o " + inimigo.getNome() + "! A vila está um passo mais segura.");
         } else {
             System.out.println("O inimigo ainda está de pé, mas você conseguiu um golpe decisivo!");
         }
@@ -45,5 +47,8 @@ public class AtoUm extends Ato {
         // Continuar com a narrativa
         System.out.println("Com o " + inimigo.getNome() + " derrotado, você se aproxima do ancião da vila para saber mais sobre os ataques misteriosos...");
         continuarHistoria();
+
+        // Avançar para o próximo ato
+        getGameState().avancarParaProximoAto();
     }
 }

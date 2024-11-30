@@ -1,27 +1,29 @@
 package game;
 
+import factory.ItemFactory;
 import inimigos.Inimigo;
 import itens.Item;
 import personagens.Personagem;
+import state.GameState;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import factory.ItemFactory;
 
 public class Combate {
     private Personagem jogador;
     private Inimigo inimigo;
     private AtaqueHandler ataqueHandler;
-    private ItemHandler itemHandler; // Agora usaremos o ItemHandler diretamente
+    private ItemHandler itemHandler;
     private boolean combateAtivo;
+    private GameState gameState;
 
-    public Combate(Personagem jogador, Inimigo inimigo) {
+    public Combate(Personagem jogador, Inimigo inimigo, GameState gameState) {
         this.jogador = jogador;
         this.inimigo = inimigo;
         this.ataqueHandler = new AtaqueHandler();
-        this.itemHandler = new ItemHandler(jogador); // Instanciamos o ItemHandler
+        this.itemHandler = new ItemHandler(jogador);
         this.combateAtivo = true;
+        this.gameState = gameState;
     }
 
     public void iniciarCombate() {
@@ -36,13 +38,13 @@ public class Combate {
 
             switch (escolha) {
                 case 1:
-                    ataqueHandler.atacar(jogador, inimigo); // Executa o ataque
+                    ataqueHandler.atacar(jogador, inimigo);
                     break;
                 case 2:
-                    itemHandler.interagirComItens(); // Manipula os itens diretamente
+                    itemHandler.interagirComItens();
                     break;
                 case 3:
-                    encerrarCombate(); // Encerra o combate (fuga)
+                    encerrarCombate();
                     System.out.println("Você fugiu do combate.");
                     break;
                 default:
@@ -58,23 +60,20 @@ public class Combate {
             System.out.println("\nVocê foi derrotado... Tente novamente.");
         } else if (inimigo.getHp() <= 0) {
             System.out.println("\nVocê derrotou o inimigo!");
-            dropItem(); // Executa a lógica de drop de itens
+            dropItem();
         }
+
     }
+
 
     private void dropItem() {
         Random random = new Random();
-        int quantidadeItens = random.nextInt(3) + 1; // Gera entre 1 e 3 itens aleatórios
+        int quantidadeItens = random.nextInt(3) + 1;
 
         System.out.println("\nO inimigo deixou os seguintes itens:");
         for (int i = 0; i < quantidadeItens; i++) {
-            // Cria um item aleatório
-            Item itemAleatorio = ItemFactory.criarItemAleatorio(); // Gera um item aleatório do registro
-
-            // Exibe o nome do item
+            Item itemAleatorio = ItemFactory.criarItemAleatorio();
             System.out.println("- " + itemAleatorio.getNome());
-
-            // Adiciona o item à mochila usando o ItemHandler
             itemHandler.adicionarItem(itemAleatorio.getNome());
         }
     }

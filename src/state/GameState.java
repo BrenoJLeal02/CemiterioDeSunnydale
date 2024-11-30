@@ -1,6 +1,8 @@
 package state;
 
 import atos.Ato;
+import atos.AtoDois;
+import atos.AtoUm;
 import personagens.Personagem;
 
 import java.util.List;
@@ -10,9 +12,9 @@ public class GameState {
     private List<Ato> atos;
     private int atoAtual;
 
-    public GameState(Personagem jogador, List<Ato> atos) {
+    public GameState(Personagem jogador) {
         this.jogador = jogador;
-        this.atos = atos;
+        this.atos = List.of(new AtoUm(jogador, this), new AtoDois(jogador, this));  // Passa o GameState para os Atos
         this.atoAtual = 0;
     }
 
@@ -31,8 +33,7 @@ public class GameState {
     public void avancarParaProximoAto() {
         if (atoAtual < atos.size() - 1) {
             atoAtual++;
-        } else {
-            System.out.println("Você completou todos os atos! Parabéns!");
+            System.out.println("Avançando para o Ato " + (atoAtual + 1));
         }
     }
 
@@ -41,6 +42,6 @@ public class GameState {
     }
 
     public int getNumeroAtoAtual() {
-        return atoAtual + 1; // Retorna um índice mais intuitivo (1, 2, 3...).
+        return atoAtual + 1;
     }
 }

@@ -2,19 +2,26 @@ package atos;
 
 import inimigos.Inimigo;
 import personagens.Personagem;
+import state.GameState;
 
 import java.util.List;
 
 public abstract class Ato {
     protected String descricao;
     protected List<Inimigo> inimigos;
-    protected Personagem personagem;
+    protected Personagem jogador;
     protected Inimigo chefe;
+    protected GameState gameState;
 
-    public Ato(String descricao) {
+    // Modifica o construtor para aceitar GameState
+    public Ato(String descricao, GameState gameState) {
         this.descricao = descricao;
-        this.personagem = personagem;
+        this.gameState = gameState;
     }
 
     public abstract void iniciar(Personagem jogador);
+
+    public GameState getGameState() {
+        return gameState;
+    }
 }

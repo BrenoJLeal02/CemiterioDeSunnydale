@@ -1,9 +1,9 @@
 package game;
 
 import atos.Ato;
-import atos.AtoUm;
+
 import factory.PersonagemFactory;
-import inimigos.Inimigo;
+
 import personagens.Personagem;
 import state.GameState;
 import utils.GameUtils;
@@ -13,35 +13,44 @@ import java.util.Scanner;
 import static utils.GameUtils.*;
 
 public class GameLogic {
-    private static Personagem personagem;
-    private static GameState atoAtual;
+    private static Personagem jogador;
     private static boolean isRunning = false;
+    private static GameState gameState;
+
     static Scanner scanner = new Scanner(System.in);
 
     public static void gameLoop() {
         while (isRunning) {
+            // Exibir o menu
             printMenu();
             int input = readInt("-> ", 3);
 
             switch (input) {
                 case 1:
-                    continueJourney();
+
+                    if (gameState.jogoCompleto()) {
+                        System.out.println("Você completou todos os atos! Parabéns!");
+                        isRunning = false;
+                        break;
+                    } else {
+                        Ato atoAtual = gameState.getAtoAtual();
+                        atoAtual.iniciar(jogador);
+
+                        gameState.avancarParaProximoAto();
+                    }
                     break;
+
                 case 2:
                     limparConsole();
-                    personagem.displayStats(personagem);
+                    jogador.displayStats(jogador);
                     break;
+
                 case 3:
                     System.out.println("Obrigado por jogar! Até a próxima.");
                     isRunning = false;
                     break;
             }
         }
-    }
-
-    private static void continueJourney() {
-        System.out.println("A aventura ainda está em desenvolvimento...");
-        isRunning = false;
     }
 
     public static void startGame() {
@@ -53,7 +62,6 @@ public class GameLogic {
         printSeparador(30);
         printSeparador(40);
         continuarHistoria();
-
 
         String nome;
         boolean nameSet = false;
@@ -72,20 +80,20 @@ public class GameLogic {
 
         limparConsole();
 
-
-        personagem = PersonagemFactory.escolherEInstanciarPersonagem(nome);
+        jogador = PersonagemFactory.escolherEInstanciarPersonagem(nome);
         limparConsole();
-        printTitulo("Bem-vindo ao jogo, " + personagem.getNome() + "!");
-        personagem.iniciarNarrativa();
+        printTitulo("Bem-vindo ao jogo, " + jogador.getNome() + "!");
+
+        jogador.iniciarNarrativa();
 
         continuarHistoria();
-        Ato atoUm = new AtoUm(personagem);
-        atoUm.iniciar(personagem);
+
+        gameState = new GameState(jogador);
+
+        gameState.getAtoAtual().iniciar(jogador);
 
         isRunning = true;
-
         gameLoop();
     }
-
-
 }
+
