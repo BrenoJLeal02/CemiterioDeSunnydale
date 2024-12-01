@@ -1,9 +1,7 @@
 package game;
 
 import atos.Ato;
-
 import factory.PersonagemFactory;
-
 import personagens.Personagem;
 import state.GameState;
 import utils.GameUtils;
@@ -26,21 +24,19 @@ public class GameLogic {
 
             switch (input) {
                 case 1:
-                    if (gameState.jogoCompleto()) {
-                        System.out.println("Você completou todos os atos! Parabéns!");
-                        isRunning = false;
-                        break;
-                    } else {
-                        Ato atoAtual = gameState.getAtoAtual();
-                        atoAtual.iniciar(jogador);
 
-                        gameState.avancarParaProximoAto();
+                        Ato atoAtual = gameState.getEstadoAtual();
+                        atoAtual.iniciar(jogador); // Executa o ato atual
+                        gameState.avancarParaProximoAto(); // Avança para o próximo ato
+
+                    if (gameState.jogoCompleto()) {
+                        isRunning = false;
                     }
                     break;
 
                 case 2:
                     limparConsole();
-                    jogador.displayStats(jogador);
+                    jogador.displayStats(jogador); // Exibe as estatísticas do jogador
                     break;
 
                 case 3:
@@ -78,7 +74,7 @@ public class GameLogic {
 
         limparConsole();
 
-        jogador = PersonagemFactory.escolherEInstanciarPersonagem(nome);
+        jogador = PersonagemFactory.escolherEInstanciarPersonagem(nome); // Criação do personagem
         limparConsole();
         printTitulo("Bem-vindo ao jogo, " + jogador.getNome() + "!");
 
@@ -86,12 +82,11 @@ public class GameLogic {
 
         continuarHistoria();
 
-        gameState = new GameState(jogador);
+        gameState = new GameState(jogador); // Inicializa o estado do jogo
 
-        gameState.getAtoAtual().iniciar(jogador);
+        gameState.iniciarAto(); // Inicia o primeiro ato
 
         isRunning = true;
-        gameLoop();
+        gameLoop(); // Começa o loop do jogo
     }
 }
-

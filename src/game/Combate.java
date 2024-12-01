@@ -1,10 +1,9 @@
 package game;
 
-import factory.ItemFactory;
 import inimigos.Inimigo;
 import itens.Item;
 import personagens.Personagem;
-import state.GameState;
+import factory.ItemFactory;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -15,15 +14,13 @@ public class Combate {
     private AtaqueHandler ataqueHandler;
     private ItemHandler itemHandler;
     private boolean combateAtivo;
-    private GameState gameState;
 
-    public Combate(Personagem jogador, Inimigo inimigo, GameState gameState) {
+    public Combate(Personagem jogador, Inimigo inimigo) {
         this.jogador = jogador;
         this.inimigo = inimigo;
         this.ataqueHandler = new AtaqueHandler();
         this.itemHandler = new ItemHandler(jogador);
         this.combateAtivo = true;
-        this.gameState = gameState;
     }
 
     public void iniciarCombate() {
@@ -62,9 +59,7 @@ public class Combate {
             System.out.println("\nVocê derrotou o inimigo!");
             dropItem();
         }
-
     }
-
 
     private void dropItem() {
         Random random = new Random();

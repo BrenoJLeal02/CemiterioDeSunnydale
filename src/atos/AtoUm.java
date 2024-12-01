@@ -1,54 +1,51 @@
 package atos;
 
+import game.ItemHandler;
 import inimigos.DemonioBasico;
 import personagens.Personagem;
 import game.Combate;
-import game.ItemHandler;
 import state.GameState;
 
-import static utils.GameUtils.continuarHistoria;
-import static utils.GameUtils.limparConsole;
+public class AtoUm implements Ato {
+    private GameState gameState;
+    private Personagem jogador;
 
-public class AtoUm extends Ato {
-
-    public AtoUm(Personagem jogador, GameState gameState) {
-        super("Ato Um", gameState);  // Passa o GameState para o Ato
+    public AtoUm(GameState gameState, Personagem jogador) {
+        this.gameState = gameState;
+        this.jogador = jogador;
     }
 
     @Override
     public void iniciar(Personagem jogador) {
-        // Criar o ItemHandler diretamente
         ItemHandler itemHandler = new ItemHandler(jogador);
 
-        // Introdução ao cenário
-        limparConsole();
-        System.out.println("Você acorda em uma pequena vila, o som de pássaros ecoa ao longe e o cheiro de madeira queimada preenche o ar.");
-        System.out.println("À sua frente, a aldeia parece tranquila, mas algo em seus instintos lhe diz que algo não está certo.");
-        System.out.println("A vila foi recentemente atacada por uma misteriosa força, e os aldeões estão em busca de heróis para defender seu lar.");
+        System.out.println("Iniciando Ato 1: Ato Um");
 
-        // Adicionar uma Poção de Cura à mochila usando o ItemHandler
+
+        // Introdução do cenário
+        System.out.println("Você acorda em uma pequena vila, o som de pássaros ecoa ao longe...");
+        System.out.println("Você encontra um inimigo à sua frente!");
         itemHandler.adicionarItem("poção de cura");
+        // Criar inimigo para o combate
+        DemonioBasico inimigo = new DemonioBasico("Demônio Básico", 50, 10, 6);
 
-        // Apresentação do primeiro inimigo
-        DemonioBasico inimigo = new DemonioBasico("Demonio Básico", 50, 10, 6);
-        System.out.println("De repente, você ouve passos pesados atrás de você. Um " + inimigo.getNome() + " emerge da floresta, com olhos brilhando em vermelho.");
+        // Iniciar combate
+        Combate combate = new Combate(jogador, inimigo);
+        combate.iniciarCombate();  // Lógica de combate
 
-        // Criando o combate
-        Combate combate = new Combate(jogador, inimigo, getGameState()); // Passando gameState para o Combate
-        combate.iniciarCombate();
-
-        // Transição para o próximo ato, após o combate
         if (inimigo.getHp() <= 0) {
-            System.out.println("Você derrotou o " + inimigo.getNome() + "! A vila está um passo mais segura.");
+            System.out.println("Você derrotou o " + inimigo.getNome() + "!");
+            gameState.setEstadoAtual(new AtoDois(gameState, jogador));  // Avançar para o AtoDois
         } else {
-            System.out.println("O inimigo ainda está de pé, mas você conseguiu um golpe decisivo!");
+            System.out.println("O inimigo ainda está de pé, mas você deu um bom golpe.");
         }
+        System.out.println("Você concluiu o Ato 1. Preparando para o próximo ato...");
+    }
 
-        // Continuar com a narrativa
-        System.out.println("Com o " + inimigo.getNome() + " derrotado, você se aproxima do ancião da vila para saber mais sobre os ataques misteriosos...");
-        continuarHistoria();
 
-        // Avançar para o próximo ato
-        getGameState().avancarParaProximoAto();
+    @Override
+    public void avancar() {
+        // O avanço do ato já é tratado em `iniciar()`, então este método pode ser simplificado ou removido.
+        System.out.println("Avançando para o próximo ato...");
     }
 }

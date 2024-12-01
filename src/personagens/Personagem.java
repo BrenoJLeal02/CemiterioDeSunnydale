@@ -77,7 +77,6 @@ public abstract class Personagem {
 
     }
 
-
     public void displayStats(Personagem personagem) {
         limparConsole();
         printTitulo("STATUS DO PERSONAGEM");
@@ -96,7 +95,6 @@ public abstract class Personagem {
         continuarHistoria();
         limparConsole();
     }
-
 
     public abstract void iniciarNarrativa();
 }
