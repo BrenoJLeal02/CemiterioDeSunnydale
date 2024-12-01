@@ -21,13 +21,11 @@ public class GameLogic {
 
     public static void gameLoop() {
         while (isRunning) {
-            // Exibir o menu
             printMenu();
             int input = readInt("-> ", 3);
 
             switch (input) {
                 case 1:
-
                     if (gameState.jogoCompleto()) {
                         System.out.println("Você completou todos os atos! Parabéns!");
                         isRunning = false;

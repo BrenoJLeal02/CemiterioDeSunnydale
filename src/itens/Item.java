@@ -21,7 +21,6 @@ public abstract class Item {
 
     public abstract void usar(Personagem jogador);
 
-    // Indica se o item é consumível (padrão: true)
     public boolean isConsumivel() {
         return true;
     }

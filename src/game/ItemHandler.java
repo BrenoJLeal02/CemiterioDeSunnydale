@@ -4,7 +4,7 @@ import personagens.Personagem;
 import itens.Item;
 import factory.ItemFactory;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ItemHandler {
@@ -20,44 +20,48 @@ public class ItemHandler {
     public void adicionarItem(String nomeItem) {
         try {
             Item item = ItemFactory.criarItem(nomeItem);
-            jogador.adicionarItemNaMochila(item);
-            System.out.println("Item " + item.getNome() + " adicionado à mochila.");
+            jogador.adicionarItemNaMochila(item); // Atualiza o mapa com o novo item
+            System.out.println("Item \"" + item.getNome() + "\" adicionado à mochila.");
         } catch (IllegalArgumentException e) {
             System.out.println("Item desconhecido: " + nomeItem);
         }
     }
 
     public void removerItem(String nomeItem) {
-        boolean removido = jogador.getMochila().removeIf(item -> item.getNome().equals(nomeItem));
-        if (removido) {
-            System.out.println(nomeItem + " foi removido da sua mochila.");
+        Map<String, Integer> mochila = jogador.getMochila();
+
+        if (mochila.containsKey(nomeItem)) {
+            int quantidade = mochila.get(nomeItem);
+            if (quantidade > 1) {
+                mochila.put(nomeItem, quantidade - 1);
+            } else {
+                mochila.remove(nomeItem);
+            }
+            System.out.println("Item \"" + nomeItem + "\" foi removido da sua mochila.");
         } else {
-            System.out.println("Item " + nomeItem + " não encontrado na mochila.");
+            System.out.println("Item \"" + nomeItem + "\" não encontrado na mochila.");
         }
     }
 
     public void visualizarItens() {
-        List<Item> mochila = jogador.getMochila();
+        Map<String, Integer> mochila = jogador.getMochila();
 
         if (mochila.isEmpty()) {
             System.out.println("Sua mochila está vazia.");
         } else {
             System.out.println("\nItens disponíveis na mochila:");
-            for (int i = 0; i < mochila.size(); i++) {
-                Item item = mochila.get(i);
-                System.out.println((i + 1) + ". " + item.getNome() + " - " + item.getDescricao());
+            int index = 1;
+            for (Map.Entry<String, Integer> entry : mochila.entrySet()) {
+                System.out.println(index++ + ". " + entry.getKey() + " (Quantidade: " + entry.getValue() + ")");
             }
         }
     }
 
     public void usarItem(String nomeItem) {
-        // Busca o item pelo nome
-        Item item = jogador.getMochila().stream()
-                .filter(it -> it.getNome().equals(nomeItem))
-                .findFirst()
-                .orElse(null);
+        Map<String, Integer> mochila = jogador.getMochila();
 
-        if (item != null) {
+        if (mochila.containsKey(nomeItem)) {
+            Item item = ItemFactory.criarItem(nomeItem); // Cria uma instância do item para usar seus efeitos
             System.out.println("\nVocê usou: " + item.getNome());
             item.usar(jogador);
 
@@ -65,7 +69,7 @@ public class ItemHandler {
                 removerItem(nomeItem);
             }
         } else {
-            System.out.println("Item " + nomeItem + " não encontrado na mochila.");
+            System.out.println("Item \"" + nomeItem + "\" não encontrado na mochila.");
         }
     }
 
@@ -81,14 +85,14 @@ public class ItemHandler {
                 break;
             }
 
-            List<Item> itens = jogador.getMochila();
-            if (escolha < 1 || escolha > itens.size()) {
+            Map<String, Integer> mochila = jogador.getMochila();
+            if (escolha < 1 || escolha > mochila.size()) {
                 System.out.println("Opção inválida! Tente novamente.");
                 continue;
             }
 
-            Item itemEscolhido = itens.get(escolha - 1);
-            usarItem(itemEscolhido.getNome());
+            String nomeItemEscolhido = (String) mochila.keySet().toArray()[escolha - 1];
+            usarItem(nomeItemEscolhido);
         }
     }
 

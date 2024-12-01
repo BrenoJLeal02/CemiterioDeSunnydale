@@ -28,9 +28,9 @@ public class ItemFactory {
     }
 
     public static Item criarItemAleatorio() {
-        List<String> nomesItens = new ArrayList<>(registry.keySet()); // Obtém as chaves registradas
+        List<String> nomesItens = new ArrayList<>(registry.keySet());
         Random random = new Random();
         String nomeAleatorio = nomesItens.get(random.nextInt(nomesItens.size())); // Escolhe uma chave aleatória
-        return criarItem(nomeAleatorio); // Cria o item com base na chave escolhida
+        return criarItem(nomeAleatorio);
     }
 }

@@ -25,7 +25,7 @@ public class AtoDois extends Ato {
         System.out.println("O ancião lhe contou sobre uma força maligna que se aproxima, e você deve impedi-la antes que seja tarde demais.");
 
 
-        Feiticeiro inimigo = new Feiticeiro("Feiticeiro", 100, 20, 8);
+        Feiticeiro inimigo = new Feiticeiro("Feiticeiro", 40, 14, 8);
         System.out.println("De repente, a terra treme sob seus pés, e um " + inimigo.getNome() + " surge das sombras, com uma aura ameaçadora.");
 
 

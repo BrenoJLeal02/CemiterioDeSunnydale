@@ -34,11 +34,14 @@ public class GameState {
         if (atoAtual < atos.size() - 1) {
             atoAtual++;
             System.out.println("Avançando para o Ato " + (atoAtual + 1));
+        }else{
+            jogoCompleto();
         }
     }
 
     public boolean jogoCompleto() {
         return atoAtual >= atos.size();
+
     }
 
     public int getNumeroAtoAtual() {
