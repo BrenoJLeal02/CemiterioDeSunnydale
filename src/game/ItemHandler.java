@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ItemHandler {
-
+    ItemFactory itemFactory = new ItemFactory();
     private Personagem jogador;
     private Scanner scanner;
 
@@ -19,7 +19,7 @@ public class ItemHandler {
 
     public void adicionarItem(String nomeItem) {
         try {
-            Item item = ItemFactory.criarItem(nomeItem);
+            Item item = itemFactory.criar(nomeItem);
             jogador.adicionarItemNaMochila(item); // Atualiza o mapa com o novo item
             System.out.println("Item \"" + item.getNome() + "\" adicionado à mochila.");
         } catch (IllegalArgumentException e) {
@@ -61,7 +61,7 @@ public class ItemHandler {
         Map<String, Integer> mochila = jogador.getMochila();
 
         if (mochila.containsKey(nomeItem)) {
-            Item item = ItemFactory.criarItem(nomeItem); // Cria uma instância do item para usar seus efeitos
+            Item item = itemFactory.criar(nomeItem); // Cria uma instância do item para usar seus efeitos
             System.out.println("\nVocê usou: " + item.getNome());
             item.usar(jogador);
 

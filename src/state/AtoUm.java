@@ -3,7 +3,6 @@ package state;
 import factory.InimigoFactory;
 import game.ItemHandler;
 import inimigos.Inimigo;
-import inimigos.VampiroBasico;
 import personagens.Bruxa;
 import personagens.Personagem;
 import game.Combate;
@@ -13,6 +12,7 @@ import personagens.Vampiro;
 import java.util.Scanner;
 
 public class AtoUm implements Ato {
+    InimigoFactory inimigoFactory = new InimigoFactory();
 
     public AtoUm(AtoState atoState, Personagem jogador) {
     }
@@ -37,7 +37,7 @@ public class AtoUm implements Ato {
         int escolha = escolhaDeCaminho();
 
         if (escolha == 1 || escolha == 2) {
-            Inimigo inimigo = InimigoFactory.criarInimigo("Vampiro");
+            Inimigo inimigo = inimigoFactory.criar("Vampiro");
             Combate combate = new Combate(jogador, inimigo);
             combate.iniciarCombate();  // Lógica de combate
             if (inimigo.getHp() <= 0) {
