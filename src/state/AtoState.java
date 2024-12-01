@@ -5,8 +5,6 @@ import personagens.Personagem;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.GameUtils.limparConsole;
-
 public class AtoState {
     private List<Ato> atos; // Lista de atos, permitindo flexibilidade para adicionar mais
     private int indiceAtual; // Indica o ato atual na lista
@@ -26,7 +24,6 @@ public class AtoState {
 
     public void iniciarAto() {
         if (indiceAtual < atos.size()) {
-            limparConsole();
             atos.get(indiceAtual).iniciar(jogador); // Inicia o ato atual
         } else {
             finalizarJogo(); // Se não houver mais atos, finaliza o jogo
@@ -36,7 +33,6 @@ public class AtoState {
     public void avancarParaProximoAto() {
         if (!jogoCompleto()) {
             indiceAtual++; // Avança para o próximo ato
-            iniciarAto();  // Inicia o próximo ato automaticamente
         } else {
             finalizarJogo(); // Se o jogo estiver completo, finaliza
         }
@@ -48,7 +44,7 @@ public class AtoState {
     }
 
     public void finalizarJogo() {
-        System.out.println("O jogo foi concluído! Parabéns por sobreviver.");
+        System.out.println("TO BE CONTINUED...");
     }
 
     // Getter para o estado atual

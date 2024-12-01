@@ -1,73 +1,94 @@
 package state;
 
+import factory.InimigoFactory;
 import game.ItemHandler;
-import inimigos.DemonioBasico;
+import inimigos.Inimigo;
+import inimigos.VampiroBasico;
 import personagens.Bruxa;
 import personagens.Personagem;
 import game.Combate;
 import personagens.Slayer;
 import personagens.Vampiro;
 
+import java.util.Scanner;
+
 public class AtoUm implements Ato {
-    private AtoState atoState;
-    private Personagem jogador;
 
     public AtoUm(AtoState atoState, Personagem jogador) {
-        this.atoState = atoState;
-        this.jogador = jogador;
     }
 
     @Override
     public void iniciar(Personagem jogador) {
         ItemHandler itemHandler = new ItemHandler(jogador);
 
-        System.out.println("Iniciando Ato 1: O Chamado das Trevas");
+        System.out.println("Iniciando Ato 1: Nas trevas");
 
         if (jogador instanceof Bruxa) {
-            System.out.println("Você acorda com uma sensação estranha. O tipo de sensação que vem antes de um grande desastre.");
-            System.out.println("Algo na energia ao seu redor está... instável. Como se o equilíbrio estivesse prestes a ser quebrado.");
-            System.out.println("Você mal tem tempo de se ajustar, quando percebe que a floresta, normalmente tranquila, está carregada com uma presença maligna.");
-            System.out.println("Você segue até o ponto onde a sensação é mais forte e, bingo, lá está ele: um demônio que parece muito mais interessado em sua magia do que você gostaria.");
-            System.out.println("Não que isso seja uma surpresa. Sempre surge alguém que acha que pode brincar com forças que não entende.");
-            System.out.println("Bom, você tem magia e não tem medo de usá-la. Hora de dar um recado a esse cara.");
+            System.out.println("Você está no cemitério de Sunnydale, sob a luz pálida da lua. A brisa fria agita as folhas secas ao seu redor.");
+            System.out.println("Treinar feitiços exige concentração. Mas algo quebra o silêncio...");
         } else if (jogador instanceof Slayer) {
-            System.out.println("Você acorda em Sunnydale, e o ar está mais pesado do que deveria. Não é o tipo de peso que vem de um dia normal.");
-            System.out.println("E antes que você pudesse sequer decidir entre café ou mais café, um demônio aparece na sua frente. Claro, não seria uma segunda-feira sem um.");
-            System.out.println("Ele parece um típico idiota – grande, feio e provavelmente com um objetivo que não envolve nada bom.");
-            System.out.println("Mas, ei, pelo menos você tem uma espada afiada e muita disposição para deixá-lo pedaços. Você tem um trabalho a fazer, e esse demônio não vai ser um problema por muito tempo.");
-            System.out.println("Porque, no fim, é assim que funciona. Você mata demônios. Eles tentam te matar. Você continua. Eles não.");
+            System.out.println("Mais uma noite de patrulha no cemitério de Sunnydale. O chão úmido e a névoa que sobe entre as lápides tornam tudo mais sombrio.");
+            System.out.println("Uma sensação estranha percorre seu corpo. Está tudo quieto demais...");
         } else if (jogador instanceof Vampiro) {
-            System.out.println("Você está na sua cripta e observa a neblina que se forma na noite. O frio é um velho amigo. O problema é outro.");
-            System.out.println("Você sente uma presença. Um demônio. Nada novo, exceto o cheiro de algo... sujo no ar. De alguma forma, ele está procurando por você.");
-            System.out.println("A coisa é grande, com olhos brilhando em uma cor que faz você lembrar que há mais a temer na noite do que apenas caçadoras.");
-            System.out.println("Você tenta ignorar. Mas o demônio se aproxima, sem medo e com um sorriso no rosto.");
-            System.out.println("Mais um saco de carne que acha que pode lidar com um vampiro. Bem, vamos ver até onde ele vai.");
-            System.out.println("Não que você precise de uma razão para fazer o que faz, mas, sinceramente, você poderia usar um pouco de diversão agora.");
+            System.out.println("Você está na sua cripta e observa a neblina que se forma na noite.");
+        }
+        System.out.println("De repente, você escuta um barulho. Um grito. Parece uma mulher.");
+
+        int escolha = escolhaDeCaminho();
+
+        if (escolha == 1 || escolha == 2) {
+            Inimigo inimigo = InimigoFactory.criarInimigo("Vampiro");
+            Combate combate = new Combate(jogador, inimigo);
+            combate.iniciarCombate();  // Lógica de combate
+            if (inimigo.getHp() <= 0) {
+                System.out.println("Você derrotou o " + inimigo.getNome() + "!");
+            } else if (jogador.getHp() <= 0) {
+                System.out.println("O inimigo ainda está de pé. Mas pra você, é fim de jogo...");
+            }
+        } else if (escolha == 3) {
+            System.out.println("Ao seguir na direção da floresta, você encontra um frasco próximo a uma árvore.");
+            System.out.println("Talvez venha a ser útil.");
+            itemHandler.adicionarItem("Poção de cura");
         }
 
-        itemHandler.adicionarItem("Poção de cura");
-        // Criar inimigo para o combate
-        DemonioBasico inimigo = new DemonioBasico("Demônio Básico", 50, 10, 6);
-
-        // Iniciar combate
-        Combate combate = new Combate(jogador, inimigo);
-        combate.iniciarCombate();  // Lógica de combate
-
-        if (inimigo.getHp() <= 0) {
-            System.out.println("Você derrotou o " + inimigo.getNome() + "!");
-            System.out.println("Mas algo ainda está errado... Este demônio não parece ser o único por aqui.");
-        } else {
-            System.out.println("O inimigo ainda está de pé, mas você deu um bom golpe.");
+        if (escolha == 2 && jogador instanceof Vampiro) {
+            System.out.println("Você segue na direção para onde a mulher seguiu e a encontra escondida.");
+            System.out.println("É sua vez de encontrar, ou melhor, recuperar o lanche da noite...");
+            jogador.setHp(jogador.getHp() + 10);
         }
 
         System.out.println("Você concluiu o Ato 1. Preparando para o próximo ato...");
-        avancar();
     }
 
     @Override
-    public void avancar() {
-        System.out.println("Avançando para o próximo ato...");
-        atoState.avancarParaProximoAto();
+    public int escolhaDeCaminho() {
+        System.out.println("O que você faz?");
+        System.out.println("1 - Corre na direção de onde veio grito.");
+        System.out.println("2 - Tenta se aproximar cautelosamente.");
+        System.out.println("3 - Resolve seguir para a direção oposta.");
+
+        Scanner scanner = new Scanner(System.in);
+        int escolha = scanner.nextInt();
+
+        switch (escolha) {
+            case 1:
+                System.out.println("\nSeu corpo reage impulsivamente e você corre com tudo na direção do som.");
+                System.out.println("Ao se aproximar, você se depara um vampiro de pé sobre uma jovem mulher.");
+                System.out.println("Com um movimento brusco, ele torce o pescoço dela com facilidade, e o som de ossos quebrando ecoa na noite.");
+                break;
+            case 2:
+                System.out.println("\nVocê decide se aproximar com cautela. Seus passos são leves, quase inaudíveis.");
+                System.out.println("A visão se revela à medida que você se aproxima: um vampiro está com os dentes enfiados no pescoço de uma jovem mulher.");
+                System.out.println("Com um movimento rápido, você golpeia a cabeça do vampiro, fazendo-o cambalear para trás.");
+                System.out.println("A jovem aproveita a chance e corre.");
+                System.out.println("Você observa o vampiro se levantar, furioso.");
+                break;
+            case 3:
+                System.out.println("Ao longe, você escuta os gritos cada vez mais distantes, até que cessam completamente.");
+                break;
+        }
+
+        return escolha;
     }
 
     @Override
