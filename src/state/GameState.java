@@ -46,6 +46,5 @@ public class GameState {
 
     public void finalizarJogo() {
         System.out.println("O jogo foi finalizado.");
-        // Lógica de finalização, como salvar progresso, etc.
     }
 }
