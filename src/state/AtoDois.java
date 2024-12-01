@@ -1,8 +1,6 @@
 package state;
 
 import factory.InimigoFactory;
-import inimigos.DemonioBasico;
-import inimigos.Feiticeiro;
 import inimigos.Inimigo;
 import personagens.Bruxa;
 import personagens.Personagem;
@@ -11,6 +9,8 @@ import personagens.Slayer;
 import personagens.Vampiro;
 
 public class AtoDois implements Ato {
+    InimigoFactory inimigoFactory = new InimigoFactory();
+
     public AtoDois(AtoState atoState, Personagem jogador) {
     }
 
@@ -37,7 +37,7 @@ public class AtoDois implements Ato {
         }
 
         // Criar inimigo para o combate
-        Inimigo inimigo = InimigoFactory.criarInimigo("Demônio");
+        Inimigo inimigo = inimigoFactory.criar("Demônio");
 
         // Iniciar combate
         Combate combate = new Combate(jogador, inimigo);

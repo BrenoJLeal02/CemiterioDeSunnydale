@@ -9,6 +9,7 @@ import java.util.Scanner;
 import static utils.GameUtils.*;
 
 public class GameLogic {
+    private static final PersonagemFactory personagemFactory = new PersonagemFactory();
     private static Personagem jogador;
     private static boolean isRunning = false;
     private static AtoState atoState;
@@ -69,7 +70,7 @@ public class GameLogic {
 
         limparConsole();
 
-        jogador = PersonagemFactory.escolherEInstanciarPersonagem(nome); // Criação do personagem
+        jogador = personagemFactory.criar(nome); // Criação do personagem
         limparConsole();
         printTitulo("Bem-vindo ao jogo, " + jogador.getNome() + "!");
 

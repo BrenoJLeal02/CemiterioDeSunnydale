@@ -5,8 +5,7 @@ import itens.*;
 import java.util.*;
 import java.util.function.Supplier;
 
-public class ItemFactory {
-
+public class ItemFactory implements Factory<Item> {
     private static final Map<String, Supplier<Item>> registry = new HashMap<>();
 
     static {
@@ -15,7 +14,8 @@ public class ItemFactory {
         // registry.put("poção de força", PocaoForca::new);
     }
 
-    public static Item criarItem(String nomeItem) {
+    @Override
+    public Item criar(String nomeItem) {
         Supplier<Item> constructor = registry.get(nomeItem.toLowerCase());
         if (constructor == null) {
             throw new IllegalArgumentException("Item desconhecido: " + nomeItem);
@@ -27,10 +27,10 @@ public class ItemFactory {
         registry.put(nomeItem.toLowerCase(), constructor);
     }
 
-    public static Item criarItemAleatorio() {
+    public Item criarItemAleatorio() {
         List<String> nomesItens = new ArrayList<>(registry.keySet());
         Random random = new Random();
         String nomeAleatorio = nomesItens.get(random.nextInt(nomesItens.size())); // Escolhe uma chave aleatória
-        return criarItem(nomeAleatorio);
+        return criar(nomeAleatorio);
     }
 }

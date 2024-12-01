@@ -67,7 +67,7 @@ public class Combate {
 
         System.out.println("\nO inimigo deixou os seguintes itens:");
         for (int i = 0; i < quantidadeItens; i++) {
-            Item itemAleatorio = ItemFactory.criarItemAleatorio();
+            Item itemAleatorio = itemHandler.itemFactory.criarItemAleatorio();
             System.out.println("- " + itemAleatorio.getNome());
             itemHandler.adicionarItem(itemAleatorio.getNome());
         }
