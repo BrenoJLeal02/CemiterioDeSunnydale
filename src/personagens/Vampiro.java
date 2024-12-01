@@ -2,7 +2,7 @@ package personagens;
 
 public class Vampiro extends Personagem {
     public Vampiro(String nome) {
-        super(nome, "FactoryPersonagem.Vampiro", "Vampiro", 50, 14, new String[]{"Golpe Vampírico", "Golpes com Supervelocidade", "Hipnose"}, "Neutro Maligno");
+        super(nome, "Vampiro", "Vampiro", 50, 14, new String[]{"Golpe Vampírico", "Golpes com Supervelocidade", "Hipnose"}, "Neutro Maligno");
     }
 
     @Override

@@ -11,8 +11,7 @@ import utils.GameUtils;
 import java.util.Scanner;
 
 public class AtaqueHandler {
-
-    private GameUtils gameUtils;
+    private final GameUtils gameUtils;
 
     public AtaqueHandler() {
         this.gameUtils = new GameUtils();
@@ -32,15 +31,15 @@ public class AtaqueHandler {
 
             switch (escolha) {
                 case 1:
-                    GolpesDaCacadoraCommand golpesCommand = new GolpesDaCacadoraCommand(slayer, inimigo, gameUtils.rolarDados());
+                    GolpesDaCacadoraCommand golpesCommand = new GolpesDaCacadoraCommand(slayer, inimigo, gameUtils.rolarDadosComExibicao());
                     golpesCommand.execute();
                     break;
                 case 2:
-                    UsarEstacaCommand usarEstacaCommand = new UsarEstacaCommand(slayer, inimigo, gameUtils.rolarDados());
+                    UsarEstacaCommand usarEstacaCommand = new UsarEstacaCommand(slayer, inimigo, gameUtils.rolarDadosComExibicao());
                     usarEstacaCommand.execute();
                     break;
                 case 3:
-                    IntimidacaoCommand intimidacaoCommand = new IntimidacaoCommand(slayer, inimigo, gameUtils.rolarDados());
+                    IntimidacaoCommand intimidacaoCommand = new IntimidacaoCommand(slayer, inimigo, gameUtils.rolarDadosComExibicao());
                     intimidacaoCommand.execute();
                     break;
                 default:
@@ -58,15 +57,15 @@ public class AtaqueHandler {
 
             switch (escolha) {
                 case 1:
-                    AtordoamentoCommand atordoamentoCommand = new AtordoamentoCommand(bruxa, inimigo, gameUtils.rolarDados());
+                    AtordoamentoCommand atordoamentoCommand = new AtordoamentoCommand(bruxa, inimigo, gameUtils.rolarDadosComExibicao());
                     atordoamentoCommand.execute();
                     break;
                 case 2:
-                    NecromanciaCommand necromanciaCommand = new NecromanciaCommand(bruxa, inimigo, gameUtils.rolarDados());
+                    NecromanciaCommand necromanciaCommand = new NecromanciaCommand(bruxa, inimigo, gameUtils.rolarDadosComExibicao());
                     necromanciaCommand.execute();
                     break;
                 case 3:
-                    BarreiraMagicaCommand barreiraMagicaCommand = new BarreiraMagicaCommand(bruxa, inimigo, gameUtils.rolarDados());
+                    BarreiraMagicaCommand barreiraMagicaCommand = new BarreiraMagicaCommand(bruxa, inimigo, gameUtils.rolarDadosComExibicao());
                     barreiraMagicaCommand.execute();
                     break;
                 default:
@@ -84,15 +83,15 @@ public class AtaqueHandler {
 
             switch (escolha) {
                 case 1:
-                    MordidaCommand golpeVampiricoCommand = new MordidaCommand(vampiro, inimigo, gameUtils.rolarDados());
+                    MordidaCommand golpeVampiricoCommand = new MordidaCommand(vampiro, inimigo, gameUtils.rolarDadosComExibicao());
                     golpeVampiricoCommand.execute();
                     break;
                 case 2:
-                    GolpesRapidosCommand regeneracaoCommand = new GolpesRapidosCommand(vampiro, inimigo, gameUtils.rolarDados());
+                    GolpesRapidosCommand regeneracaoCommand = new GolpesRapidosCommand(vampiro, inimigo, gameUtils.rolarDadosComExibicao());
                     regeneracaoCommand.execute();
                     break;
                 case 3:
-                    HipnoseCommand hipnoseCommand = new HipnoseCommand(vampiro, inimigo, gameUtils.rolarDados());
+                    HipnoseCommand hipnoseCommand = new HipnoseCommand(vampiro, inimigo, gameUtils.rolarDadosComExibicao());
                     hipnoseCommand.execute();
                     break;
                 default:
@@ -118,5 +117,4 @@ public class AtaqueHandler {
             jogador.setHp(jogador.getHp() - dano);
         }
     }
-
 }

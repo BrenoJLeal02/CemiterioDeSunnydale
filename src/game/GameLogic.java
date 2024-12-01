@@ -1,10 +1,9 @@
 package game;
 
-import atos.Ato;
+import state.Ato;
 import factory.PersonagemFactory;
 import personagens.Personagem;
-import state.GameState;
-import utils.GameUtils;
+import state.AtoState;
 
 import java.util.Scanner;
 
@@ -13,36 +12,31 @@ import static utils.GameUtils.*;
 public class GameLogic {
     private static Personagem jogador;
     private static boolean isRunning = false;
-    private static GameState gameState;
+    private static AtoState atoState;
 
     static Scanner scanner = new Scanner(System.in);
 
     public static void gameLoop() {
         while (isRunning) {
-            printMenu();
-            int input = readInt("-> ", 3);
+            if (atoState.jogoCompleto()) {
+                isRunning = false; // Finaliza o jogo se o jogo estiver completo
+            } else {
+                printMenu();
+                int input = readInt("-> ", 3);
 
-            switch (input) {
-                case 1:
-
-                        Ato atoAtual = gameState.getEstadoAtual();
-                        atoAtual.iniciar(jogador); // Executa o ato atual
-                        gameState.avancarParaProximoAto(); // Avança para o próximo ato
-
-                    if (gameState.jogoCompleto()) {
-                        isRunning = false;
-                    }
-                    break;
-
-                case 2:
-                    limparConsole();
-                    jogador.displayStats(jogador); // Exibe as estatísticas do jogador
-                    break;
-
-                case 3:
-                    System.out.println("Obrigado por jogar! Até a próxima.");
-                    isRunning = false;
-                    break;
+                switch (input) {
+                    case 1:
+                        atoState.iniciarAto(); // Inicia o ato atual
+                        break;
+                    case 2:
+                        limparConsole();
+                        jogador.displayStats(jogador); // Exibe as estatísticas do jogador
+                        break;
+                    case 3:
+                        System.out.println("Obrigado por jogar! Até a próxima.");
+                        isRunning = false; // Finaliza o jogo
+                        break;
+                }
             }
         }
     }
@@ -82,9 +76,9 @@ public class GameLogic {
 
         continuarHistoria();
 
-        gameState = new GameState(jogador); // Inicializa o estado do jogo
+        atoState = new AtoState(jogador); // Inicializa o estado do jogo
 
-        gameState.iniciarAto(); // Inicia o primeiro ato
+        atoState.iniciarAto(); // Inicia o primeiro ato
 
         isRunning = true;
         gameLoop(); // Começa o loop do jogo
