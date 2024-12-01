@@ -10,6 +10,17 @@ public class GameUtils {
         return random.nextInt(20) + 1;
     }
 
+    public int rolarDadosComExibicao() {
+        Random random = new Random();
+        printSeparador(20);
+        System.out.println("Rolando os dados...");
+        printSeparador(20);
+        int resultado = random.nextInt(20) + 1;
+        System.out.println("Resultado da rolagem: " + resultado);
+        printSeparador(20);
+        return resultado;
+    }
+
     public static int readInt(String prompt, int userChoices) {
         Scanner scanner = new Scanner(System.in);
         int input;
