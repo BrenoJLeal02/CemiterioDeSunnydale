@@ -16,11 +16,14 @@ public class IntimidacaoCommand implements Command {
 
     @Override
     public void execute() {
-        if (chance > 7) {
+        if (chance > 16) {
             System.out.println("O inimigo fica intimidado e seus ataques causam menos dano nos próximos turnos.");
-            inimigo.setDano(Math.max(0, inimigo.getDano() - 2));
-        } else {
+            slayer.setAc(slayer.getAc() + 2);
+        } else if (chance < 5) {
             System.out.println("O inimigo não se intimida e continua com sua força total!");
+        } else {
+            System.out.println("O inimigo fica intimidado e você causa um dano de 2.");
+            inimigo.setHp(inimigo.getHp() - 2);
         }
     }
 }

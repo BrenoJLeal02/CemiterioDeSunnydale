@@ -55,6 +55,9 @@ public class AtoUm implements Ato {
             System.out.println("Você segue na direção para onde a mulher seguiu e a encontra escondida.");
             System.out.println("É sua vez de encontrar, ou melhor, recuperar o lanche da noite...");
             jogador.setHp(jogador.getHp() + 10);
+        } else if (escolha == 1 && jogador instanceof Vampiro) {
+            System.out.println("Você não consegue se alimentar e perde energia com a batalha...");
+            jogador.setHp(jogador.getHp() - 2);
         }
 
         System.out.println("Você concluiu o Ato 1. Preparando para o próximo ato...");

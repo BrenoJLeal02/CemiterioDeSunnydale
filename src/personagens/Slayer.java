@@ -2,7 +2,7 @@ package personagens;
 
 public class Slayer extends Personagem {
     public Slayer(String name) {
-        super(name, "Humano", "Slayer", 45, 16, new String[]{"Soco da Caçadora", "Estaca", "Intimidação"}, "Leal Neutro");
+        super(name, "Humano", "Slayer", 45, 16, new String[]{"Golpes da Caçadora", "Usar Estaca", "Intimidação"}, "Leal Neutro");
     }
 
     @Override

@@ -17,7 +17,7 @@ public class UsarEstacaCommand implements Command {
 
     @Override
     public void execute() {
-        if (inimigo instanceof VampiroBasico && chance > 15) {
+        if (inimigo instanceof VampiroBasico && chance > 16) {
             inimigo.setHp(0);
             System.out.println("\nVocê acertou a estaca no coração do vampiro e o derrotou!");
         } else if (chance < 4) {
