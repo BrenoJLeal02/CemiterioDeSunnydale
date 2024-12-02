@@ -1,9 +1,9 @@
 package game;
 
+import command.FugirCommand;
 import inimigos.Inimigo;
 import itens.Item;
 import personagens.Personagem;
-import factory.ItemFactory;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class Combate {
     private Personagem jogador;
     private Inimigo inimigo;
-    private AtaqueHandler ataqueHandler;
-    private ItemHandler itemHandler;
+    private final AtaqueHandler ataqueHandler;
+    private final ItemHandler itemHandler;
     private boolean combateAtivo;
 
     public Combate(Personagem jogador, Inimigo inimigo) {
@@ -41,8 +41,8 @@ public class Combate {
                     itemHandler.interagirComItens();
                     break;
                 case 3:
-                    encerrarCombate();
-                    System.out.println("Você fugiu do combate.");
+                    FugirCommand fugirCommand = new FugirCommand(jogador, inimigo, this);
+                    fugirCommand.execute();
                     break;
                 default:
                     System.out.println("Opção inválida.");

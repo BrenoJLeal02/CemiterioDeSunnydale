@@ -11,6 +11,7 @@ public class ItemFactory implements Factory<Item> {
     static {
         registry.put("poção de cura", PocaoCura::new);
         registry.put("barreira protetora", BarreiraProtetora::new);
+        registry.put("jaqueta armadura", JaquetaArmadura::new);
         // registry.put("poção de força", PocaoForca::new);
     }
 
