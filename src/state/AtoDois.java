@@ -25,15 +25,15 @@ public class AtoDois implements Ato {
             System.out.println("Um demônio emerge das sombras. Seus olhos brilham com uma fome insaciável.");
             System.out.println("Ele ruge, mas você mantém a calma. Este é o tipo de situação para a qual suas magias foram feitas.");
         } else if (jogador instanceof Slayer) {
-            System.out.println("Você avança pela floresta com passos firmes. O som de folhas secas esmagadas sob suas botas ecoa na quietude.");
+            System.out.println("Você avança para a floresta com passos firmes. O som de folhas secas esmagadas sob suas botas ecoa na quietude.");
             System.out.println("De repente, um cheiro de enxofre invade o ar. Seus instintos entram em alerta, e você puxa sua arma, pronta para o que vier.");
             System.out.println("Um demônio com chifres retorcidos e garras afiadas surge de trás de uma árvore caída.");
         } else if (jogador instanceof Vampiro) {
-            System.out.println("A floresta à noite é confortável para você, mas há algo... diferente no ar.");
-            System.out.println("Não é apenas o cheiro de terra úmida e folhas mortas.");
+            System.out.println("A floresta à noite é atrativa e confortável para você e você resolve adentrá-la.");
+            System.out.println("Mas há algo... diferente no ar. Não é apenas o cheiro de terra úmida e folhas mortas.");
             System.out.println("Você para de andar quando uma figura monstruosa aparece.");
-            System.out.println("Um demônio com uma pele esverdeada cheia de cicatrizes e um sorriso cruel, se aproxima. Seus olhos brilham como carvões em brasa.");
-            System.out.println("Ele não fala, mas não precisa. O confronto é inevitável. Ele quer sangue, e você está mais do que disposto a retribuir o favor.");
+            System.out.println("Um demônio com chifres retorcidos se aproxima.");
+            System.out.println("Ele não fala, mas não precisa. Ele quer brigar, e você está mais do que disposto a retribuir o favor.");
         }
 
         // Criar inimigo para o combate
