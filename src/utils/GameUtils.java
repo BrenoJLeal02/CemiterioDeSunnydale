@@ -1,13 +1,24 @@
 package utils;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameUtils {
 
-    public static String getPlayerName() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o nome do seu personagem: ");
-        return scanner.nextLine();
+    public int rolarDados() {
+        Random random = new Random();
+        return random.nextInt(20) + 1;
+    }
+
+    public int rolarDadosComExibicao() {
+        Random random = new Random();
+        printSeparador(20);
+        System.out.println("Rolando os dados...");
+        printSeparador(20);
+        int resultado = random.nextInt(20) + 1;
+        System.out.println("Resultado da rolagem: " + resultado);
+        printSeparador(20);
+        return resultado;
     }
 
     public static int readInt(String prompt, int userChoices) {
@@ -44,6 +55,15 @@ public class GameUtils {
         printSeparador(30);
         System.out.println(title);
         printSeparador(30);
+    }
+
+    public static void printMenu() {
+        limparConsole();
+        System.out.println("Escolha suas ações:");
+        printSeparador(20);
+        System.out.println("(1) Continuar jornada");
+        System.out.println("(2) Status do Personagem");
+        System.out.println("(3) Sair do jogo");
     }
 
     //Para o jogo até o usuário digitar algo e dar enter

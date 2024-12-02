@@ -5,13 +5,11 @@ import personagens.Personagem;
 import personagens.Slayer;
 import personagens.Vampiro;
 
-import java.util.Scanner;
-
 import static utils.GameUtils.readInt;
 
-public class PersonagemFactory {
-
-    public static Personagem escolherEInstanciarPersonagem(String nome) {
+public class PersonagemFactory implements Factory<Personagem> {
+    @Override
+    public Personagem criar(String nome) {
         while (true) {
             System.out.println("Escolha um personagem para iniciar o jogo:");
             System.out.println("(1) Bruxa Poderosa");
