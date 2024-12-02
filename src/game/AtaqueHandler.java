@@ -20,8 +20,7 @@ public class AtaqueHandler {
     public void atacar(Personagem jogador, Inimigo inimigo) {
         Scanner scanner = new Scanner(System.in);
 
-        if (jogador instanceof Slayer) {
-            Slayer slayer = (Slayer) jogador;
+        if (jogador instanceof Slayer slayer) {
             System.out.println("Escolha um tipo de ataque:");
             System.out.println("1. Golpe da Caçadora");
             System.out.println("2. Usar Estaca");
@@ -46,10 +45,9 @@ public class AtaqueHandler {
                     System.out.println("Opção inválida.");
                     break;
             }
-        } else if (jogador instanceof Bruxa) {
-            Bruxa bruxa = (Bruxa) jogador;
+        } else if (jogador instanceof Bruxa bruxa) {
             System.out.println("Escolha um tipo de ataque:");
-            System.out.println("1. Atordoamento");
+            System.out.println("1. Raio de Fogo");
             System.out.println("2. Necromancia");
             System.out.println("3. Barreira Mágica");
             System.out.print("Digite sua escolha: ");
@@ -57,8 +55,8 @@ public class AtaqueHandler {
 
             switch (escolha) {
                 case 1:
-                    AtordoamentoCommand atordoamentoCommand = new AtordoamentoCommand(bruxa, inimigo, gameUtils.rolarDadosComExibicao());
-                    atordoamentoCommand.execute();
+                    RaioDeFogoCommand raioDeFogoCommand = new RaioDeFogoCommand(bruxa, inimigo, gameUtils.rolarDadosComExibicao());
+                    raioDeFogoCommand.execute();
                     break;
                 case 2:
                     NecromanciaCommand necromanciaCommand = new NecromanciaCommand(bruxa, inimigo, gameUtils.rolarDadosComExibicao());
@@ -72,8 +70,7 @@ public class AtaqueHandler {
                     System.out.println("Opção inválida.");
                     break;
             }
-        } else if (jogador instanceof Vampiro) {
-            Vampiro vampiro = (Vampiro) jogador;
+        } else if (jogador instanceof Vampiro vampiro) {
             System.out.println("Escolha um tipo de ataque:");
             System.out.println("1. Mordida Vampírica");
             System.out.println("2. Golpes com Supervelocidade");
@@ -103,7 +100,6 @@ public class AtaqueHandler {
         inimigoAtacar(jogador, inimigo);
     }
 
-
     private void inimigoAtacar(Personagem jogador, Inimigo inimigo) {
         if (inimigo.isHipnotizado()) {
             System.out.println("O inimigo está hipnotizado e não pode atacar neste turno!");
@@ -112,9 +108,14 @@ public class AtaqueHandler {
             System.out.println("A Barreira Mágica está ativa! Você não sofre dano neste turno.");
             jogador.setBarreiraAtiva(jogador.getBarreiraAtiva() - 1); // Reduz a duração da barreira
         } else {
-            int dano = 15 - gameUtils.rolarDados();
-            System.out.println("O inimigo ataca e causa " + dano + " de dano!");
-            jogador.setHp(jogador.getHp() - dano);
+            int chance = gameUtils.rolarDados();
+            if (chance > jogador.getAc()) {
+                int dano = chance - 5;
+                System.out.println("O inimigo ataca e causa " + dano + " de dano!");
+                jogador.setHp(jogador.getHp() - dano);
+            } else {
+                System.out.println("O inimigo não consegue te atingir.");
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ public class BarreiraMagicaCommand implements Command {
     @Override
     public void execute() {
         if (chance < 4) {
-            int vida = 7 - chance;
+            int vida = 6 - chance;
             System.out.println("\nVocê erra ao tentar utilizar a Barreira Mágica e aumenta o HP do inimigo em " + vida);
             inimigo.setHp(inimigo.getHp() + vida);
         } else {

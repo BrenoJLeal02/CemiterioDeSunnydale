@@ -20,8 +20,8 @@ public class NecromanciaCommand implements Command {
             int dano = chance * 2 - 5;
             System.out.println("\nVocê usa a Necromancia, invocando energia das trevas e causando " + dano + " de dano ao inimigo!");
             inimigo.setHp(inimigo.getHp() - dano);
-        } else if (chance < 10) {
-            int dano = 10 - chance;
+        } else if (chance < 6) {
+            int dano = 6 - chance;
             System.out.println("\nVocê é tomada pela energia das trevas que tentou invocar e perde " + dano + " de HP!");
             bruxa.setHp(bruxa.getHp() - dano);
         } else {

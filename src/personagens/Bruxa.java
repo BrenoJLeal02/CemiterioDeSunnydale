@@ -3,7 +3,7 @@ package personagens;
 public class Bruxa extends Personagem {
 
     public Bruxa(String name) {
-        super(name, "Humano", "Bruxa", 40, 12, new String[]{"Encantamento", "Necromancia", "Ilusão"}, "Caótica Boa");
+        super(name, "Humano", "Bruxa", 40, 12, new String[]{"Raio de Fogo", "Necromancia", "Barreira Mágica"}, "Caótica Boa");
     }
 
     @Override
